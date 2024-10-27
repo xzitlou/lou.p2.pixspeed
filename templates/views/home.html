@@ -9,15 +9,85 @@
     <div class="container pt-3">
         <div class="col-md-6 mx-auto">
             <div class="highlight p-3 border rounded-2">
-                <form>
+                <form id="websiteForm" action="{{ request.path }}" method="post">
+                    {% csrf_token %}
                     <div class="mb-3">
                         <label for="website" class="form-label">Website URL</label>
-                        <input type="url" class="form-control py-3" id="website" placeholder="https://mywebsite.com" autofocus>
+                        <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://mywebsite.com" autofocus>
                         <div id="websiteHelp" class="form-text">Enter your website URL and we will optimize all images</div>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                 </form>
+                <div id="listImages"></div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        (function () {
+            "use strict";
+            $(document).ready(
+                function () {
+                    var container = $(".page-container");
+
+                    container.on("submit", "#websiteForm", onSubmitWebsiteForm);
+                    container.on("click", "#processImages", onProcessImages);
+
+                    function onProcessImages() {
+                        container.find("#processImages").remove();
+                        var images = $(".images-found div[data-url]");
+                        processImagesSequentially(images);
+                    }
+
+                    function processImagesSequentially(images) {
+                        if (images.length === 0) {
+                            console.log("All images have been processed.");
+                            return;
+                        }
+
+                        var currentImage = images.first();
+                        var imageUrl = currentImage.data("url");
+                        var resultDiv = currentImage.find(".result");
+
+                        resultDiv.html(`<div class="spinner-border text-primary" role="status"> <span class="sr-only d-none">Loading...</span></div>`);
+
+                        // Realiza la solicitud AJAX al endpoint
+                        $.ajax({
+                            url: "https://api.pixspeed.com/url",
+                            type: "POST",
+                            data: {url: imageUrl},
+                            success: function (response) {
+                                resultDiv.html(`<div class="text-center"><div>-${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">Download</a>`);
+                                currentImage.removeAttr("data-url");
+                                processImagesSequentially(images.slice(1));
+                            },
+                            error: function () {
+                                resultDiv.html(`<span class="text-danger">Error</span>`);
+                                currentImage.removeAttr("data-url");
+
+                                processImagesSequentially(images.slice(1));
+                            }
+                        });
+                    }
+
+                    function onSubmitWebsiteForm(e) {
+                        e.preventDefault();
+                        $.ajax({
+                            url: "{% url 'web-extractor' %}",
+                            type: "POST",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                container.find("#websiteForm button").remove();
+                                container.find("#listImages").html(response.html);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert("Error: " + textStatus + ": " + errorThrown);
+                            }
+                        });
+                    }
+                }
+            );
+        }());
+    </script>
 {% endblock %}

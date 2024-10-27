@@ -19,3 +19,38 @@ body {
 .highlight {
     background-color: #f8f9fa;
 }
+
+.images-found .icon {
+    height: 48px;
+    width: 48px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.images-found .name {
+    max-width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.images-found .icon img {
+    object-fit: cover;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.images-found > div + div {
+    margin-top: 5px;
+}
+
+.images-found > div {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.total-images-found {
+    background-color: #304166 !important;
+    color: #fff !important;
+}

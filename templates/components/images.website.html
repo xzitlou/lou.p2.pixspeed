@@ -1,0 +1,16 @@
+<hr>
+<div class="images-found">
+    <div class="total-images-found text-center"><b>{{ images | length }}</b> images found</div>
+    {% for image in images %}
+        <div class="d-flex align-items-center" data-url="{{ image.url }}">
+            <div class="icon">
+                <img src="{{ image.url }}">
+            </div>
+            <div class="name fw-bold ms-2">{{ image.filename }}</div>
+            <div class="result ms-auto d-flex align-items-center"></div>
+        </div>
+    {% empty %}
+        <div class="alert alert-warning">No images found</div>
+    {% endfor %}
+</div>
+<button id="processImages" class="btn btn-primary w-100 mt-4">Optimize images</button>
