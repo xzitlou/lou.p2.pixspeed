@@ -31,7 +31,7 @@ class Translation(models.Model):
 
             Utils.set_to_cache(key, data)
 
-        return data[lang] or data["en"]
+        return data.get(lang, {}) or data.get("en", {})
 
     @staticmethod
     def register_text_translated(data):

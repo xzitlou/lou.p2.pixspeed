@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container-xxl">
+        <div class="col-md-8 mx-auto text-center">
+            <h1 class="mb-3 fw-semibold lh-1">Optimize Your Images, WebP, PNG and JPEG for Faster Websites</h1>
+            <p class="lead mb-4">Reduce image sizes without compromising quality and improve your website's performance</p>
+        </div>
+    </div>
+    <div class="container pt-3">
+        <div class="col-md-6 mx-auto">
+            <div class="highlight p-3 border rounded-2">
+                <form>
+                    <div class="mb-3">
+                        <label for="website" class="form-label">Website URL</label>
+                        <input type="url" class="form-control py-3" id="website" placeholder="https://mywebsite.com" autofocus>
+                        <div id="websiteHelp" class="form-text">Enter your website URL and we will optimize all images</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
