@@ -50,8 +50,8 @@ class IndexPage(View):
             "views/home.html",
             {
                 "page": "home",
-                "title": f"{settings.get('i18n').get('home_title')} | PixSpeed.com",
-                "description": settings.get('i18n').get('home_meta'),
+                "title": f"PixSpeed: Image Optimization for Faster, SEO-Friendly Websites | PixSpeed.com",
+                "description": "Optimize your images with PixSpeed to boost your website's loading speed and SEO performance. Compress JPEG, PNG, and WebP images without compromising quality for a faster, more user-friendly experience.",
                 "g": settings,
             }
         )
