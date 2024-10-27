@@ -1,7 +1,6 @@
 venv
 config.py
 .idea
-*.txt
 *.vtt
 *.pyc
 __pycache__
