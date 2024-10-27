@@ -70,5 +70,18 @@
 <script src="/static/js/bootstrap.min.js"></script>
 <script>window.csrf_token = "{{ csrf_token }}";</script>
 {% block scripts %}{% endblock %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6Q3F4SQ58W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-6Q3F4SQ58W');
+</script>
 </body>
 </html>
