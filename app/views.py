@@ -35,7 +35,8 @@ class GlobalVars:
             "scripts_version": SCRIPT_VERSION,
             "api_domain": API_DOMAIN,
             "conversions": "{:,}".format(Counter.get_counter("conversion")),
-            "rate_limit": RATE_LIMIT
+            "rate_limit": RATE_LIMIT,
+            "total_images": Utils.get_from_cache("total_images_optimized")
         }
         Utils.print_connections()
         return context
@@ -116,6 +117,19 @@ class WebExtractorAPIPage(View):
         )
 
         return JsonResponse({"html": html_content})
+
+
+class ImageCounterAPI(View):
+    @staticmethod
+    def post(request, *args, **kwargs):
+        # Obtener el contador actual o iniciar en 0 si no existe
+        total_images = Utils.get_from_cache('total_images_optimized')
+
+        # Incrementar el contador
+        total_images += 1
+        Utils.set_to_cache('total_images_optimized', total_images)
+
+        return JsonResponse({"total_images_optimized": total_images})
 
 
 class TermsPage(View):

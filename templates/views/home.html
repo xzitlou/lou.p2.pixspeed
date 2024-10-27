@@ -60,6 +60,15 @@
                             success: function (response) {
                                 resultDiv.html(`<div class="text-center"><div>-${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">Download</a>`);
                                 currentImage.removeAttr("data-url");
+
+                                $.ajax({
+                                    url: "{% url "api-counter" %}",
+                                    type: "POST",
+                                    headers: {
+                                        "X-CSRFToken": window.csrf_token
+                                    },
+                                });
+
                                 processImagesSequentially(images.slice(1));
                             },
                             error: function () {

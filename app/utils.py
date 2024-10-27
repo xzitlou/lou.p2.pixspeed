@@ -97,7 +97,7 @@ class Utils:
 
     @staticmethod
     def get_from_cache(key):
-        return cache.get(key)
+        return cache.get(key, 0)
 
     @staticmethod
     def set_to_cache(key, value, exp=60 * 60 * 24 * 30):
