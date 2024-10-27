@@ -58,7 +58,7 @@
                             type: "POST",
                             data: {url: imageUrl},
                             success: function (response) {
-                                resultDiv.html(`<div class="text-center"><div>-${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">Download</a>`);
+                                resultDiv.html(`<div class="text-center"><div class="fw-bold">-${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">Download</a>`);
                                 currentImage.removeAttr("data-url");
 
                                 $.ajax({
