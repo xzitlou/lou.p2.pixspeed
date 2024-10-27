@@ -1,0 +1,17 @@
+[
+  {
+    "iso": "es",
+    "text": "Español",
+    "en_label": "Spanish"
+  },
+  {
+    "iso": "en",
+    "text": "English",
+    "en_label": "English"
+  },
+  {
+    "iso": "pt",
+    "text": "Português",
+    "en_label": "Portuguese"
+  }
+]
