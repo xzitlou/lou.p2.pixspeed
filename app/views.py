@@ -97,9 +97,12 @@ class WebExtractorAPIPage(View):
 
         # Realizar una solicitud a la URL para extraer imágenes
         try:
-            response = requests.get(website_url)
+            response = requests.get(website_url, headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Safari/537.36"
+            })
             response.raise_for_status()
-        except requests.RequestException:
+        except Exception as e:
+            print(str(e))
             return JsonResponse({
                 "error": settings.get("i18n").get("failed_fetch_webpage")
             }, status=500)
