@@ -51,8 +51,8 @@ class IndexPage(View):
             "views/home.html",
             {
                 "page": "home",
-                "title": f"PixSpeed: Image Optimization for Faster, SEO-Friendly Websites | PixSpeed.com",
-                "description": "Optimize your images with PixSpeed to boost your website's loading speed and SEO performance. Compress JPEG, PNG, and WebP images without compromising quality for a faster, more user-friendly experience.",
+                "title": f"{settings.get('i18n').get('home_title')} | PixSpeed.com",
+                "description": settings.get("i18n").get("home_meta_description"),
                 "g": settings,
             }
         )
@@ -81,7 +81,9 @@ class ThanksPage(LoginRequiredMixin, View):
 
 
 class WebExtractorAPIPage(View):
-    def post(self, request, *args, **kwargs):
+    @staticmethod
+    def post(request, *args, **kwargs):
+        settings = GlobalVars.get_globals(request)
         website_url = request.POST.get("website")
 
         # Validar la URL
@@ -89,14 +91,18 @@ class WebExtractorAPIPage(View):
         try:
             validator(website_url)
         except ValidationError:
-            return JsonResponse({"error": "Invalid URL"}, status=400)
+            return JsonResponse({
+                "error": settings.get("i18n").get("invalid_url")
+            }, status=400)
 
         # Realizar una solicitud a la URL para extraer imágenes
         try:
             response = requests.get(website_url)
             response.raise_for_status()
         except requests.RequestException:
-            return JsonResponse({"error": "Failed to fetch the webpage"}, status=500)
+            return JsonResponse({
+                "error": settings.get("i18n").get("failed_fetch_webpage")
+            }, status=500)
 
         # Extraer las URLs de las imágenes usando BeautifulSoup
         soup = BeautifulSoup(response.text, "html.parser")
@@ -105,14 +111,20 @@ class WebExtractorAPIPage(View):
         # Convertir URLs relativas a absolutas
         images = []
         for img_url in img_urls:
-            absolute_url = requests.compat.urljoin(website_url, img_url)
-            filename = os.path.basename(absolute_url)
-            images.append({"filename": filename, "url": absolute_url})
+            if ".webp" in img_url or ".jpg" in img_url or ".jpeg" in img_url or ".png" in img_url:
+                img_url = img_url.split("?")[0]
+                absolute_url = requests.compat.urljoin(website_url, img_url)
+                filename = os.path.basename(absolute_url)
+                images.append({
+                    "filename": filename,
+                    "url": absolute_url
+                })
 
         html_content = render_to_string(
             "components/images.website.html",
             {
-                "images": images
+                "images": images,
+                "g": settings,
             }
         )
 

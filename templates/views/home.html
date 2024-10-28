@@ -2,8 +2,8 @@
 {% block content %}
     <div class="container-xxl">
         <div class="col-md-8 mx-auto text-center">
-            <h1 class="mb-3 fw-semibold lh-1">Optimize Your Images, WebP, PNG and JPEG for Faster Websites</h1>
-            <p class="lead mb-4">Reduce image sizes without compromising quality and improve your website's performance</p>
+            <h1 class="mb-3 fw-semibold lh-1">{{ g.i18n.home_h1 }}</h1>
+            <p class="lead mb-4">{{ g.i18n.home_h2 }}</p>
         </div>
     </div>
     <div class="container pt-3">
@@ -12,11 +12,11 @@
                 <form id="websiteForm" action="{{ request.path }}" method="post">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label for="website" class="form-label">Website URL</label>
-                        <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://mywebsite.com" autofocus>
-                        <div id="websiteHelp" class="form-text">Enter your website URL and we will optimize all images</div>
+                        <label for="website" class="form-label">{{ g.i18n.label_website }}</label>
+                        <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://pixspeed.com" autofocus>
+                        <div id="websiteHelp" class="form-text">{{ g.i18n.placeholder_website }}</div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    <button type="submit" class="btn btn-primary w-100">{{ g.i18n.submit }}</button>
                 </form>
                 <div id="listImages"></div>
             </div>
@@ -50,7 +50,7 @@
                         var imageUrl = currentImage.data("url");
                         var resultDiv = currentImage.find(".result");
 
-                        resultDiv.html(`<div class="spinner-border text-primary" role="status"> <span class="sr-only d-none">Loading...</span></div>`);
+                        resultDiv.html(`<div class="spinner-border text-primary" role="status"> <span class="sr-only d-none">{{ g.i18n.loading }}...</span></div>`);
 
                         // Realiza la solicitud AJAX al endpoint
                         $.ajax({
@@ -58,7 +58,7 @@
                             type: "POST",
                             data: {url: imageUrl},
                             success: function (response) {
-                                resultDiv.html(`<div class="text-center"><div class="fw-bold">-${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">Download</a>`);
+                                resultDiv.html(`<div class="text-center"><div class="fw-bold">-${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">{{ g.i18n.download }}</a>`);
                                 currentImage.removeAttr("data-url");
 
                                 $.ajax({
@@ -72,7 +72,7 @@
                                 processImagesSequentially(images.slice(1));
                             },
                             error: function () {
-                                resultDiv.html(`<span class="text-danger">Error</span>`);
+                                resultDiv.html(`<span class="text-danger">{{ g.i18n.error }}</span>`);
                                 currentImage.removeAttr("data-url");
 
                                 processImagesSequentially(images.slice(1));

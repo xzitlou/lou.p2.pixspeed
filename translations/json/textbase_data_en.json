@@ -1,0 +1,62 @@
+[
+  {
+    "code_name": "home_title",
+    "text": "PixSpeed: Image Optimization for Faster, SEO-Friendly Websites"
+  },
+  {
+    "code_name": "home_meta_description",
+    "text": "Optimize your images with PixSpeed to boost your website's loading speed and SEO performance. Compress JPEG, PNG, and WebP images without compromising quality for a faster, more user-friendly experience."
+  },
+  {
+    "code_name": "home_h1",
+    "text": "Optimize Your Images, WebP, PNG and JPEG for Faster Websites"
+  },
+  {
+    "code_name": "home_h2",
+    "text": "Reduce image sizes without compromising quality and improve your website's performance"
+  },
+  {
+    "code_name": "label_website",
+    "text": "Website URL"
+  },
+  {
+    "code_name": "placeholder_website",
+    "text": "Enter your website URL and we will optimize all images"
+  },
+  {
+    "code_name": "submit",
+    "text": "Submit"
+  },
+  {
+    "code_name": "loading",
+    "text": "Loading"
+  },
+  {
+    "code_name": "download",
+    "text": "Download"
+  },
+  {
+    "code_name": "error",
+    "text": "Error"
+  },
+  {
+    "code_name": "invalid_url",
+    "text": "Invalid URL"
+  },
+  {
+    "code_name": "failed_fetch_webpage",
+    "text": "Failed to fetch the webpage"
+  },
+  {
+    "code_name": "images_found",
+    "text": "images found"
+  },
+  {
+    "code_name": "no_images_found",
+    "text": "No images found"
+  },
+  {
+    "code_name": "optimize_images",
+    "text": "Optimize images"
+  }
+]
