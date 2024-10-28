@@ -69,7 +69,7 @@
                         resultDiv.html(`<div class="spinner-border text-primary" role="status"> <span class="sr-only d-none">{{ g.i18n.loading }}...</span></div>`);
 
                         $.ajax({
-                            url: "https://api.pixspeed.com/url",
+                            url: "{{ g.api_domain }}/url",
                             type: "POST",
                             data: {url: imageUrl},
                             success: function (response) {
