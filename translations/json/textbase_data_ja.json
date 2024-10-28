@@ -1,19 +1,19 @@
 [
   {
     "code_name": "home_title",
-    "text": "PixSpeed：高速でSEOに優れたWebサイトのための画像最適化"
+    "text": "PixSpeed：より高速でSEOに優しいウェブサイトのための画像最適化"
   },
   {
     "code_name": "home_meta_description",
-    "text": "PixSpeedで画像を最適化して、Webサイトの読み込み速度とSEOパフォーマンスを向上させましょう。JPEG、PNG、WebP画像を品質を損なわずに圧縮し、より高速でユーザーフレンドリーな体験を提供します。"
+    "text": "PixSpeedで画像を最適化し、ウェブサイトの読み込み速度とSEOパフォーマンスを向上させましょう。品質を損なうことなくJPEG、PNG、WebP画像を圧縮します。"
   },
   {
     "code_name": "home_h1",
-    "text": "高速なWebサイトのために画像、WebP、PNG、JPEGを最適化"
+    "text": "より高速なウェブサイトのために画像を最適化"
   },
   {
     "code_name": "home_h2",
-    "text": "品質を損なうことなく画像サイズを縮小し、Webサイトのパフォーマンスを向上させましょう"
+    "text": "読み込み時間を短縮し、ウェブサイトのパフォーマンスを向上させるために画像サイズ (PNG、JPG、JPEG、WEBP) を削減します。"
   },
   {
     "code_name": "label_website",
@@ -21,7 +21,7 @@
   },
   {
     "code_name": "placeholder_website",
-    "text": "ウェブサイトのURLを入力すると、すべての画像を最適化します"
+    "text": "送信ボタンをクリックすることで、ポリシーに自動的に同意したことになります。少し時間をとってお読みください。"
   },
   {
     "code_name": "submit",
@@ -57,10 +57,50 @@
   },
   {
     "code_name": "optimize_images",
-    "text": "画像を最適化"
+    "text": "画像を最適化する"
   },
   {
     "code_name": "images_deleted",
     "text": "すべての画像は1時間後に削除されます"
+  },
+  {
+    "code_name": "home_h3",
+    "text": "より良いウェブサイトはより速く読み込まれます"
+  },
+  {
+    "code_name": "terms_of_service",
+    "text": "利用規約"
+  },
+  {
+    "code_name": "privacy_policy",
+    "text": "プライバシーポリシー"
+  },
+  {
+    "code_name": "how_it_works",
+    "text": "使い方"
+  },
+  {
+    "code_name": "total_images_optimized",
+    "text": "最適化された画像の総数"
+  },
+  {
+    "code_name": "remove",
+    "text": "削除する"
+  },
+  {
+    "code_name": "terms_title",
+    "text": "利用規約"
+  },
+  {
+    "code_name": "terms_meta_description",
+    "text": "PixSpeed.comを使用することで、これらの利用規約に同意したことになります。必ずお読みください。"
+  },
+  {
+    "code_name": "privacy_title",
+    "text": "プライバシーポリシー"
+  },
+  {
+    "code_name": "privacy_meta_description",
+    "text": "PixSpeed.comを使用することで、これらのプライバシーポリシーに同意したことになります。必ずお読みください。"
   }
 ]

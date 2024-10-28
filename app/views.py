@@ -36,7 +36,8 @@ class GlobalVars:
             "api_domain": API_DOMAIN,
             "conversions": "{:,}".format(Counter.get_counter("conversion")),
             "rate_limit": RATE_LIMIT,
-            "total_images": Utils.get_from_cache("total_images_optimized")
+            "total_images": Utils.get_from_cache("total_images_optimized"),
+            "debug": DEBUG
         }
         Utils.print_connections()
         return context

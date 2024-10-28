@@ -1,19 +1,19 @@
 [
   {
     "code_name": "home_title",
-    "text": "PixSpeed: Otimização de Imagens para Sites Mais Rápidos e SEO-Friendly"
+    "text": "PixSpeed: Otimização de Imagens para Sites Mais Rápidos e Amigáveis ao SEO"
   },
   {
     "code_name": "home_meta_description",
-    "text": "Otimize suas imagens com o PixSpeed para melhorar a velocidade de carregamento e o desempenho de SEO do seu site. Comprima imagens JPEG, PNG e WebP sem comprometer a qualidade para uma experiência mais rápida e amigável ao usuário."
+    "text": "Otimize suas imagens com o PixSpeed para aumentar a velocidade de carregamento do seu site e o desempenho em SEO. Comprime imagens JPEG, PNG e WebP sem perder qualidade para uma experiência mais rápida e amigável ao usuário."
   },
   {
     "code_name": "home_h1",
-    "text": "Otimize Suas Imagens, WebP, PNG e JPEG para Sites Mais Rápidos"
+    "text": "Otimize suas Imagens para Sites Mais Rápidos"
   },
   {
     "code_name": "home_h2",
-    "text": "Reduza o tamanho das imagens sem comprometer a qualidade e melhore o desempenho do seu site"
+    "text": "Reduza os tamanhos das imagens (PNG, JPG, JPEG e WEBP) para tempos de carregamento mais rápidos e melhor desempenho do site."
   },
   {
     "code_name": "label_website",
@@ -21,7 +21,7 @@
   },
   {
     "code_name": "placeholder_website",
-    "text": "Digite a URL do seu site e otimizaremos todas as imagens"
+    "text": "Ao clicar no botão Enviar, você aceita automaticamente nossas políticas. Reserve um momento para lê-las."
   },
   {
     "code_name": "submit",
@@ -41,11 +41,11 @@
   },
   {
     "code_name": "invalid_url",
-    "text": "URL Inválida"
+    "text": "URL Inválido"
   },
   {
     "code_name": "failed_fetch_webpage",
-    "text": "Falha ao buscar a página da web"
+    "text": "Falha ao carregar a página da web"
   },
   {
     "code_name": "images_found",
@@ -61,6 +61,46 @@
   },
   {
     "code_name": "images_deleted",
-    "text": "Todas as imagens são eliminadas após 1 hora"
+    "text": "Todas as imagens são excluídas após 1 hora"
+  },
+  {
+    "code_name": "home_h3",
+    "text": "Sites melhores carregam mais rápido"
+  },
+  {
+    "code_name": "terms_of_service",
+    "text": "Termos de Serviço"
+  },
+  {
+    "code_name": "privacy_policy",
+    "text": "Política de Privacidade"
+  },
+  {
+    "code_name": "how_it_works",
+    "text": "Como Funciona?"
+  },
+  {
+    "code_name": "total_images_optimized",
+    "text": "Total de Imagens Otimizadas"
+  },
+  {
+    "code_name": "remove",
+    "text": "Remover"
+  },
+  {
+    "code_name": "terms_title",
+    "text": "Termos de Serviço"
+  },
+  {
+    "code_name": "terms_meta_description",
+    "text": "Ao usar o PixSpeed.com, você aceita estes termos de serviço. Por favor, leia-os com atenção."
+  },
+  {
+    "code_name": "privacy_title",
+    "text": "Política de Privacidade"
+  },
+  {
+    "code_name": "privacy_meta_description",
+    "text": "Ao usar o PixSpeed.com, você aceita estas políticas de privacidade. Por favor, leia-as com atenção."
   }
 ]

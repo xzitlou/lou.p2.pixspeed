@@ -86,5 +86,21 @@
   {
     "code_name": "remove",
     "text": "Remove"
+  },
+  {
+    "code_name": "terms_title",
+    "text": "Terms of service"
+  },
+  {
+    "code_name": "terms_meta_description",
+    "text": "By using PixSpeed.com, you accept these terms of service. Please read them carefully."
+  },
+  {
+    "code_name": "privacy_title",
+    "text": "Privacy policy"
+  },
+  {
+    "code_name": "privacy_meta_description",
+    "text": "By using PixSpeed.com, you accept these privacy policies. Please read them carefully."
   }
 ]

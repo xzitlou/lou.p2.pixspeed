@@ -7,7 +7,7 @@
                     <img src="{{ image.url }}">
                 </div>
                 <div class="name fw-bold ms-2 flex-grow-1 me-2">{{ image.filename }}</div>
-                <div class="result ms-auto d-flex align-items-center">
+                <div class="result ms-auto d-flex align-items-center flex-shrink-0">
                     <button class="btn btn-outline-danger btn-sm remove-item">{{ g.i18n.remove }}</button>
                 </div>
             </div>
@@ -15,5 +15,5 @@
             <div class="alert alert-warning">{{ g.i18n.no_images_found }}</div>
         {% endfor %}
     </div>
-    <button id="processImages" class="btn btn-primary btn-lg w-100 mt-4">{{ g.i18n.optimize_images }}</button>
+    <button id="processImages" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100 mt-4">{{ g.i18n.optimize_images }}</button>
 </div>

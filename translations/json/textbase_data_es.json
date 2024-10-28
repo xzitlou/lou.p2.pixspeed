@@ -1,19 +1,19 @@
 [
   {
     "code_name": "home_title",
-    "text": "PixSpeed: Optimización de imágenes para sitios web más rápidos y amigables con el SEO"
+    "text": "PixSpeed: Optimización de Imágenes para Sitios Web Más Rápidos y Amigables con SEO"
   },
   {
     "code_name": "home_meta_description",
-    "text": "Optimiza tus imágenes con PixSpeed para mejorar la velocidad de carga de tu sitio web y el rendimiento de SEO. Comprime imágenes JPEG, PNG y WebP sin comprometer la calidad para una experiencia más rápida y amigable para el usuario."
+    "text": "Optimiza tus imágenes con PixSpeed para mejorar la velocidad de carga de tu sitio web y el rendimiento en SEO. Comprime imágenes JPEG, PNG y WebP sin comprometer la calidad para una experiencia más rápida y fácil de usar."
   },
   {
     "code_name": "home_h1",
-    "text": "Optimiza tus imágenes, WebP, PNG y JPEG para sitios web más rápidos"
+    "text": "Optimiza tus imágenes para sitios web más rápidos"
   },
   {
     "code_name": "home_h2",
-    "text": "Reduce el tamaño de las imágenes sin comprometer la calidad y mejora el rendimiento de tu sitio web"
+    "text": "Reduce el tamaño de las imágenes (PNG, JPG, JPEG y WEBP) para tiempos de carga más rápidos y un mejor rendimiento del sitio web."
   },
   {
     "code_name": "label_website",
@@ -21,7 +21,7 @@
   },
   {
     "code_name": "placeholder_website",
-    "text": "Ingresa la URL de tu sitio web y optimizaremos todas las imágenes"
+    "text": "Al hacer clic en el botón Enviar, aceptas automáticamente nuestras políticas. Por favor, tómate un momento para leerlas."
   },
   {
     "code_name": "submit",
@@ -45,7 +45,7 @@
   },
   {
     "code_name": "failed_fetch_webpage",
-    "text": "Error al obtener la página web"
+    "text": "No se pudo obtener la página web"
   },
   {
     "code_name": "images_found",
@@ -61,6 +61,46 @@
   },
   {
     "code_name": "images_deleted",
-    "text": "Todas las imágenes son eliminadas luego de 1 hora"
+    "text": "Todas las imágenes se eliminan después de 1 hora"
+  },
+  {
+    "code_name": "home_h3",
+    "text": "Los mejores sitios web cargan más rápido"
+  },
+  {
+    "code_name": "terms_of_service",
+    "text": "Términos del servicio"
+  },
+  {
+    "code_name": "privacy_policy",
+    "text": "Política de privacidad"
+  },
+  {
+    "code_name": "how_it_works",
+    "text": "¿Cómo funciona?"
+  },
+  {
+    "code_name": "total_images_optimized",
+    "text": "Total de imágenes optimizadas"
+  },
+  {
+    "code_name": "remove",
+    "text": "Eliminar"
+  },
+  {
+    "code_name": "terms_title",
+    "text": "Términos del servicio"
+  },
+  {
+    "code_name": "terms_meta_description",
+    "text": "Al usar PixSpeed.com, aceptas estos términos del servicio. Por favor, léelos detenidamente."
+  },
+  {
+    "code_name": "privacy_title",
+    "text": "Política de privacidad"
+  },
+  {
+    "code_name": "privacy_meta_description",
+    "text": "Al usar PixSpeed.com, aceptas estas políticas de privacidad. Por favor, léelas detenidamente."
   }
 ]

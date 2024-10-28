@@ -1,27 +1,27 @@
 [
   {
     "code_name": "home_title",
-    "text": "PixSpeed：为更快、更SEO友好的网站进行图片优化"
+    "text": "PixSpeed：图像优化，使网站更快、更适合SEO"
   },
   {
     "code_name": "home_meta_description",
-    "text": "使用PixSpeed优化您的图片，以提升网站加载速度和SEO性能。压缩JPEG、PNG和WebP图片，在不影响质量的情况下提供更快速、用户友好的体验。"
+    "text": "使用PixSpeed优化您的图片，以提高网站加载速度和SEO性能。压缩JPEG、PNG和WebP图像，在不损失质量的情况下实现更快的用户体验。"
   },
   {
     "code_name": "home_h1",
-    "text": "优化您的图片、WebP、PNG和JPEG以提升网站速度"
+    "text": "优化您的图像以加快网站速度"
   },
   {
     "code_name": "home_h2",
-    "text": "在不影响质量的情况下缩小图片大小，提升网站性能"
+    "text": "减少图像大小（PNG、JPG、JPEG和WEBP），以加快加载时间并提升网站性能。"
   },
   {
     "code_name": "label_website",
-    "text": "网站URL"
+    "text": "网站 URL"
   },
   {
     "code_name": "placeholder_website",
-    "text": "输入您的网站URL，我们将优化所有图片"
+    "text": "点击提交按钮即表示您自动接受我们的政策。请花一点时间阅读它们。"
   },
   {
     "code_name": "submit",
@@ -45,22 +45,62 @@
   },
   {
     "code_name": "failed_fetch_webpage",
-    "text": "获取网页失败"
+    "text": "网页获取失败"
   },
   {
     "code_name": "images_found",
-    "text": "找到的图片"
+    "text": "找到的图像"
   },
   {
     "code_name": "no_images_found",
-    "text": "未找到图片"
+    "text": "未找到图像"
   },
   {
     "code_name": "optimize_images",
-    "text": "优化图片"
+    "text": "优化图像"
   },
   {
     "code_name": "images_deleted",
-    "text": "所有图片将在1小时后删除"
+    "text": "所有图像将在1小时后删除"
+  },
+  {
+    "code_name": "home_h3",
+    "text": "更好的网站加载更快"
+  },
+  {
+    "code_name": "terms_of_service",
+    "text": "服务条款"
+  },
+  {
+    "code_name": "privacy_policy",
+    "text": "隐私政策"
+  },
+  {
+    "code_name": "how_it_works",
+    "text": "它如何工作？"
+  },
+  {
+    "code_name": "total_images_optimized",
+    "text": "已优化的总图像数"
+  },
+  {
+    "code_name": "remove",
+    "text": "移除"
+  },
+  {
+    "code_name": "terms_title",
+    "text": "服务条款"
+  },
+  {
+    "code_name": "terms_meta_description",
+    "text": "使用PixSpeed.com即表示您接受这些服务条款。请仔细阅读。"
+  },
+  {
+    "code_name": "privacy_title",
+    "text": "隐私政策"
+  },
+  {
+    "code_name": "privacy_meta_description",
+    "text": "使用PixSpeed.com即表示您接受这些隐私政策。请仔细阅读。"
   }
 ]
