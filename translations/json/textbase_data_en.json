@@ -9,11 +9,11 @@
   },
   {
     "code_name": "home_h1",
-    "text": "Optimize Your Images, WebP, PNG and JPEG for Faster Websites"
+    "text": "Optimize Your Images for Faster Websites"
   },
   {
     "code_name": "home_h2",
-    "text": "Reduce image sizes without compromising quality and improve your website's performance"
+    "text": "Reduce image sizes (PNG, JPG, JPEG, and WEBP) for faster loading times and enhanced website performance."
   },
   {
     "code_name": "label_website",
@@ -21,7 +21,7 @@
   },
   {
     "code_name": "placeholder_website",
-    "text": "Enter your website URL and we will optimize all images"
+    "text": "By clicking the Submit button you automatically accept our policies. Please take a momento to read them."
   },
   {
     "code_name": "submit",
@@ -62,5 +62,29 @@
   {
     "code_name": "images_deleted",
     "text": "All images are deleted after 1 hour"
+  },
+  {
+    "code_name": "home_h3",
+    "text": "Better websites load faster"
+  },
+  {
+    "code_name": "terms_of_service",
+    "text": "Terms of service"
+  },
+  {
+    "code_name": "privacy_policy",
+    "text": "Privacy policy"
+  },
+  {
+    "code_name": "how_it_works",
+    "text": "How it works?"
+  },
+  {
+    "code_name": "total_images_optimized",
+    "text": "Total images optimized"
+  },
+  {
+    "code_name": "remove",
+    "text": "Remove"
   }
 ]

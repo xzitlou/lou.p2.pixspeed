@@ -7,7 +7,9 @@
                     <img src="{{ image.url }}">
                 </div>
                 <div class="name fw-bold ms-2 flex-grow-1 me-2">{{ image.filename }}</div>
-                <div class="result ms-auto d-flex align-items-center"></div>
+                <div class="result ms-auto d-flex align-items-center">
+                    <button class="btn btn-outline-danger btn-sm remove-item">{{ g.i18n.remove }}</button>
+                </div>
             </div>
         {% empty %}
             <div class="alert alert-warning">{{ g.i18n.no_images_found }}</div>
