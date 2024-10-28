@@ -1,7 +1,7 @@
 from django.db import models
 
 from app.utils import Utils
-from config import APP_VERSION
+from config import APP_VERSION, TRANSLATION_VERSION
 
 
 class Language(models.Model):
@@ -14,7 +14,7 @@ class Language(models.Model):
 
     @staticmethod
     def get_all(iso: str = None):
-        key = f"languages__{APP_VERSION}"
+        key = f"languages__{TRANSLATION_VERSION}"
         data = Utils.get_from_cache(key)
 
         if not data:
