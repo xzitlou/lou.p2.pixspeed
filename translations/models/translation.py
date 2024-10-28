@@ -17,7 +17,7 @@ class Translation(models.Model):
 
     @staticmethod
     def get_text_by_lang(lang: str = None):
-        key = f"i18n__{APP_VERSION}"
+        key = f"i18n__{TRANSLATION_VERSION}"
         data = Utils.get_from_cache(key)
 
         if not data:
