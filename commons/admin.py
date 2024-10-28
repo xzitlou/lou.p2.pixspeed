@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from commons.models.counter import Counter
+from commons.models.website_scrape import WebsiteScrape
 
 
 class CounterAdmin(admin.ModelAdmin):
@@ -10,4 +11,12 @@ class CounterAdmin(admin.ModelAdmin):
     )
 
 
+class WebsiteScrapeAdmin(admin.ModelAdmin):
+    list_display = (
+        "url",
+        "scraped_at",
+    )
+
+
 admin.site.register(Counter, CounterAdmin)
+admin.site.register(WebsiteScrape, WebsiteScrapeAdmin)

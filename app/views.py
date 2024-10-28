@@ -12,6 +12,7 @@ from django.shortcuts import render
 from django.views.generic import View
 
 from commons.models.counter import Counter
+from commons.models.website_scrape import WebsiteScrape
 from config import SCRIPT_VERSION, API_DOMAIN, RATE_LIMIT, DEBUG
 from translations.models.language import Language
 from translations.models.translation import Translation
@@ -85,7 +86,7 @@ class WebExtractorAPIPage(View):
     @staticmethod
     def post(request, *args, **kwargs):
         settings = GlobalVars.get_globals(request)
-        website_url = request.POST.get("website")
+        website_url = request.POST.get("website", "").strip()
 
         # Validar la URL
         validator = URLValidator()
@@ -95,6 +96,8 @@ class WebExtractorAPIPage(View):
             return JsonResponse({
                 "error": settings.get("i18n").get("invalid_url")
             }, status=400)
+
+        WebsiteScrape.objects.create(url=website_url)
 
         # Realizar una solicitud a la URL para extraer imágenes
         try:
