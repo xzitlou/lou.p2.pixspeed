@@ -1,0 +1,66 @@
+[
+  {
+    "code_name": "home_title",
+    "text": "PixSpeed: Bildoptimierung für schnellere, SEO-freundliche Websites"
+  },
+  {
+    "code_name": "home_meta_description",
+    "text": "Optimiere deine Bilder mit PixSpeed, um die Ladegeschwindigkeit und SEO-Leistung deiner Website zu verbessern. Komprimiere JPEG-, PNG- und WebP-Bilder ohne Qualitätsverlust für ein schnelleres und benutzerfreundlicheres Erlebnis."
+  },
+  {
+    "code_name": "home_h1",
+    "text": "Optimiere deine Bilder, WebP, PNG und JPEG für schnellere Websites"
+  },
+  {
+    "code_name": "home_h2",
+    "text": "Reduziere die Bildgrößen ohne Qualitätsverlust und verbessere die Leistung deiner Website"
+  },
+  {
+    "code_name": "label_website",
+    "text": "Website-URL"
+  },
+  {
+    "code_name": "placeholder_website",
+    "text": "Geben Sie die URL Ihrer Website ein, und wir optimieren alle Bilder"
+  },
+  {
+    "code_name": "submit",
+    "text": "Einreichen"
+  },
+  {
+    "code_name": "loading",
+    "text": "Wird geladen"
+  },
+  {
+    "code_name": "download",
+    "text": "Herunterladen"
+  },
+  {
+    "code_name": "error",
+    "text": "Fehler"
+  },
+  {
+    "code_name": "invalid_url",
+    "text": "Ungültige URL"
+  },
+  {
+    "code_name": "failed_fetch_webpage",
+    "text": "Webseite konnte nicht geladen werden"
+  },
+  {
+    "code_name": "images_found",
+    "text": "Bilder gefunden"
+  },
+  {
+    "code_name": "no_images_found",
+    "text": "Keine Bilder gefunden"
+  },
+  {
+    "code_name": "optimize_images",
+    "text": "Bilder optimieren"
+  },
+  {
+    "code_name": "images_deleted",
+    "text": "Alle Bilder werden nach 1 Stunde gelöscht"
+  }
+]
