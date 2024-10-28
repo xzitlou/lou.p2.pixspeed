@@ -1,0 +1,66 @@
+[
+  {
+    "code_name": "home_title",
+    "text": "PixSpeed：为更快、更SEO友好的网站进行图片优化"
+  },
+  {
+    "code_name": "home_meta_description",
+    "text": "使用PixSpeed优化您的图片，以提升网站加载速度和SEO性能。压缩JPEG、PNG和WebP图片，在不影响质量的情况下提供更快速、用户友好的体验。"
+  },
+  {
+    "code_name": "home_h1",
+    "text": "优化您的图片、WebP、PNG和JPEG以提升网站速度"
+  },
+  {
+    "code_name": "home_h2",
+    "text": "在不影响质量的情况下缩小图片大小，提升网站性能"
+  },
+  {
+    "code_name": "label_website",
+    "text": "网站URL"
+  },
+  {
+    "code_name": "placeholder_website",
+    "text": "输入您的网站URL，我们将优化所有图片"
+  },
+  {
+    "code_name": "submit",
+    "text": "提交"
+  },
+  {
+    "code_name": "loading",
+    "text": "加载中"
+  },
+  {
+    "code_name": "download",
+    "text": "下载"
+  },
+  {
+    "code_name": "error",
+    "text": "错误"
+  },
+  {
+    "code_name": "invalid_url",
+    "text": "无效的URL"
+  },
+  {
+    "code_name": "failed_fetch_webpage",
+    "text": "获取网页失败"
+  },
+  {
+    "code_name": "images_found",
+    "text": "找到的图片"
+  },
+  {
+    "code_name": "no_images_found",
+    "text": "未找到图片"
+  },
+  {
+    "code_name": "optimize_images",
+    "text": "优化图片"
+  },
+  {
+    "code_name": "images_deleted",
+    "text": "所有图片将在1小时后删除"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "code_name": "home_title",
+    "text": "PixSpeed：高速でSEOに優れたWebサイトのための画像最適化"
+  },
+  {
+    "code_name": "home_meta_description",
+    "text": "PixSpeedで画像を最適化して、Webサイトの読み込み速度とSEOパフォーマンスを向上させましょう。JPEG、PNG、WebP画像を品質を損なわずに圧縮し、より高速でユーザーフレンドリーな体験を提供します。"
+  },
+  {
+    "code_name": "home_h1",
+    "text": "高速なWebサイトのために画像、WebP、PNG、JPEGを最適化"
+  },
+  {
+    "code_name": "home_h2",
+    "text": "品質を損なうことなく画像サイズを縮小し、Webサイトのパフォーマンスを向上させましょう"
+  },
+  {
+    "code_name": "label_website",
+    "text": "ウェブサイトURL"
+  },
+  {
+    "code_name": "placeholder_website",
+    "text": "ウェブサイトのURLを入力すると、すべての画像を最適化します"
+  },
+  {
+    "code_name": "submit",
+    "text": "送信"
+  },
+  {
+    "code_name": "loading",
+    "text": "読み込み中"
+  },
+  {
+    "code_name": "download",
+    "text": "ダウンロード"
+  },
+  {
+    "code_name": "error",
+    "text": "エラー"
+  },
+  {
+    "code_name": "invalid_url",
+    "text": "無効なURL"
+  },
+  {
+    "code_name": "failed_fetch_webpage",
+    "text": "ウェブページの取得に失敗しました"
+  },
+  {
+    "code_name": "images_found",
+    "text": "画像が見つかりました"
+  },
+  {
+    "code_name": "no_images_found",
+    "text": "画像が見つかりません"
+  },
+  {
+    "code_name": "optimize_images",
+    "text": "画像を最適化"
+  },
+  {
+    "code_name": "images_deleted",
+    "text": "すべての画像は1時間後に削除されます"
+  }
+]

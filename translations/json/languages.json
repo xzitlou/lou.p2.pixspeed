@@ -13,5 +13,25 @@
     "iso": "pt",
     "text": "Português",
     "en_label": "Portuguese"
+  },
+  {
+    "iso": "de",
+    "text": "Deutsche",
+    "en_label": "German"
+  },
+  {
+    "iso": "zh",
+    "text": "中国",
+    "en_label": "Chinese"
+  },
+  {
+    "iso": "ja",
+    "text": "日本語",
+    "en_label": "Japanese"
+  },
+  {
+    "iso": "hi",
+    "text": "हिंदी",
+    "en_label": "Hindi"
   }
 ]

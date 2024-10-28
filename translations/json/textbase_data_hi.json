@@ -1,0 +1,66 @@
+[
+  {
+    "code_name": "home_title",
+    "text": "PixSpeed: तेज़, SEO-अनुकूल वेबसाइटों के लिए छवि अनुकूलन"
+  },
+  {
+    "code_name": "home_meta_description",
+    "text": "PixSpeed के साथ अपनी छवियों का अनुकूलन करें और अपनी वेबसाइट की लोडिंग गति और SEO प्रदर्शन को बढ़ाएं। JPEG, PNG और WebP छवियों को गुणवत्ता में कोई समझौता किए बिना संपीड़ित करें, ताकि उपयोगकर्ता के लिए एक तेज़ और बेहतर अनुभव प्रदान किया जा सके।"
+  },
+  {
+    "code_name": "home_h1",
+    "text": "अपनी वेबसाइट की गति बढ़ाने के लिए अपनी छवियों, WebP, PNG और JPEG को अनुकूलित करें"
+  },
+  {
+    "code_name": "home_h2",
+    "text": "गुणवत्ता से समझौता किए बिना छवि आकार को कम करें और अपनी वेबसाइट का प्रदर्शन बढ़ाएं"
+  },
+  {
+    "code_name": "label_website",
+    "text": "वेबसाइट URL"
+  },
+  {
+    "code_name": "placeholder_website",
+    "text": "अपनी वेबसाइट का URL दर्ज करें और हम सभी छवियों को अनुकूलित करेंगे"
+  },
+  {
+    "code_name": "submit",
+    "text": "प्रस्तुत करें"
+  },
+  {
+    "code_name": "loading",
+    "text": "लोड हो रहा है"
+  },
+  {
+    "code_name": "download",
+    "text": "डाउनलोड करें"
+  },
+  {
+    "code_name": "error",
+    "text": "त्रुटि"
+  },
+  {
+    "code_name": "invalid_url",
+    "text": "अमान्य URL"
+  },
+  {
+    "code_name": "failed_fetch_webpage",
+    "text": "वेबसाइट लाने में विफल"
+  },
+  {
+    "code_name": "images_found",
+    "text": "मिली हुई छवियां"
+  },
+  {
+    "code_name": "no_images_found",
+    "text": "कोई छवियां नहीं मिलीं"
+  },
+  {
+    "code_name": "optimize_images",
+    "text": "छवियों को अनुकूलित करें"
+  },
+  {
+    "code_name": "images_deleted",
+    "text": "सभी छवियां 1 घंटे के बाद हटा दी जाती हैं"
+  }
+]
