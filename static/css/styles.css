@@ -8,6 +8,10 @@ body {
     color: rgba(33, 37, 41, 0.75);
 }
 
+#header a {
+    color: #fff !important;
+}
+
 .page-header {
     font-size: calc(1.525rem + 3.3vw);
 }
@@ -28,7 +32,6 @@ body {
 }
 
 .images-found .name {
-    max-width: 50%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -53,4 +56,52 @@ body {
 .total-images-found {
     background-color: #304166 !important;
     color: #fff !important;
+}
+
+.bd-masthead {
+    --bd-pink-rgb: 214, 51, 132;
+    padding: 3rem 0 0 0;
+    background-image: linear-gradient(180deg, rgba(var(--bs-body-bg-rgb), 0.01), rgba(var(--bs-body-bg-rgb), 1) 85%), radial-gradient(ellipse at top left, rgba(var(--bs-primary-rgb), 0.5), transparent 50%), radial-gradient(ellipse at top right, rgba(255, 228, 132, 0.5), transparent 50%), radial-gradient(ellipse at center right, rgba(112.520718, 44.062154, 249.437846, 0.5), transparent 50%), radial-gradient(ellipse at center left, rgba(var(--bd-pink-rgb), 0.5), transparent 50%);
+}
+
+.bd-navbar {
+    padding: .75rem 0;
+    background-color: transparent;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.bd-navbar::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    display: block;
+    content: "";
+    background-image: linear-gradient(rgba(112.520718, 44.062154, 249.437846, 1), rgba(112.520718, 44.062154, 249.437846, 0.95));
+}
+
+#webName {
+    letter-spacing: 1px;
+}
+
+.bd-btn-lg {
+    --bs-btn-border-radius: .5rem;
+    padding: .8125rem 2rem;
+}
+
+.container {
+    max-width: 920px;
+}
+
+.btn-bd-primary {
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: #712cf9;
+    --bs-btn-border-color: #712cf9;
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #6528e0;
+    --bs-btn-hover-border-color: #6528e0;
+    --bs-btn-focus-shadow-rgb: 112.520718, 44.062154, 249.437846;
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #5a23c8;
+    --bs-btn-active-border-color: #5a23c8;
 }

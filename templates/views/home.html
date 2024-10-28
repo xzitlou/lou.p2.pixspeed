@@ -1,23 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container-xxl">
-        <div class="col-md-8 mx-auto text-center">
-            <h1 class="mb-3 fw-semibold lh-1">{{ g.i18n.home_h1 }}</h1>
-            <p class="lead mb-4">{{ g.i18n.home_h2 }}</p>
+    <div class="bd-masthead">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="mb-3 fw-semibold lh-1">{{ g.i18n.home_h1 }}</h1>
+                <p class="lead mb-4">{{ g.i18n.home_h2 }}</p>
+            </div>
+            <div class="row g-3 g-md-5 align-items-center">
+                <div class="col-lg-8 mx-auto">
+                    <div class="highlight p-3 border rounded-2">
+                        <form id="websiteForm" action="{{ request.path }}" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="website" class="form-label">{{ g.i18n.label_website }}</label>
+                                <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://pixspeed.com" autofocus>
+                                <div id="websiteHelp" class="form-text">{{ g.i18n.placeholder_website }}</div>
+                            </div>
+                            <button type="submit" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100" id="submitButton">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                {{ g.i18n.submit }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container pt-3">
-        <div class="col-md-6 mx-auto">
-            <div class="highlight p-3 border rounded-2">
-                <form id="websiteForm" action="{{ request.path }}" method="post">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="website" class="form-label">{{ g.i18n.label_website }}</label>
-                        <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://pixspeed.com" autofocus>
-                        <div id="websiteHelp" class="form-text">{{ g.i18n.placeholder_website }}</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">{{ g.i18n.submit }}</button>
-                </form>
+        <div class="row g-3 g-md-5 align-items-center">
+            <div class="col-md-8 mx-auto">
                 <div id="listImages"></div>
             </div>
         </div>
@@ -36,6 +47,10 @@
 
                     function onProcessImages() {
                         container.find("#processImages").remove();
+                        $('html, body').animate({
+                            scrollTop: $("#listImages").offset().top
+                        }, 500);
+
                         var images = $(".images-found div[data-url]");
                         processImagesSequentially(images);
                     }
@@ -52,7 +67,6 @@
 
                         resultDiv.html(`<div class="spinner-border text-primary" role="status"> <span class="sr-only d-none">{{ g.i18n.loading }}...</span></div>`);
 
-                        // Realiza la solicitud AJAX al endpoint
                         $.ajax({
                             url: "https://api.pixspeed.com/url",
                             type: "POST",
@@ -82,16 +96,25 @@
 
                     function onSubmitWebsiteForm(e) {
                         e.preventDefault();
+                        var target = $(this);
+                        var submitButton = target.find("#submitButton");
+
+                        submitButton.prop("disabled", true);
+                        submitButton.find(".spinner-border").removeClass("d-none");
+
                         $.ajax({
                             url: "{% url 'web-extractor' %}",
                             type: "POST",
                             data: $(this).serialize(),
                             success: function (response) {
-                                container.find("#websiteForm button").remove();
                                 container.find("#listImages").html(response.html);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 alert("Error: " + textStatus + ": " + errorThrown);
+                            },
+                            complete: function () {
+                                submitButton.prop("disabled", false);
+                                submitButton.find(".spinner-border").addClass("d-none");
                             }
                         });
                     }

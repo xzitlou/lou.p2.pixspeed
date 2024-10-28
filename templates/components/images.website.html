@@ -1,16 +1,17 @@
-<hr>
-<div class="images-found">
-    <div class="total-images-found text-center"><b>{{ images | length }}</b> {{ g.i18n.images_found }}</div>
-    {% for image in images %}
-        <div class="d-flex align-items-center" data-url="{{ image.url }}">
-            <div class="icon">
-                <img src="{{ image.url }}">
+<div class="highlight p-3 border rounded-2">
+    <div class="images-found">
+        <div class="total-images-found text-center"><b>{{ images | length }}</b> {{ g.i18n.images_found }}</div>
+        {% for image in images %}
+            <div class="d-flex align-items-center" data-url="{{ image.url }}">
+                <div class="icon flex-shrink-0">
+                    <img src="{{ image.url }}">
+                </div>
+                <div class="name fw-bold ms-2 flex-grow-1 me-2">{{ image.filename }}</div>
+                <div class="result ms-auto d-flex align-items-center"></div>
             </div>
-            <div class="name fw-bold ms-2">{{ image.filename }}</div>
-            <div class="result ms-auto d-flex align-items-center"></div>
-        </div>
-    {% empty %}
-        <div class="alert alert-warning">{{ g.i18n.no_images_found }}</div>
-    {% endfor %}
+        {% empty %}
+            <div class="alert alert-warning">{{ g.i18n.no_images_found }}</div>
+        {% endfor %}
+    </div>
+    <button id="processImages" class="btn btn-primary btn-lg w-100 mt-4">{{ g.i18n.optimize_images }}</button>
 </div>
-<button id="processImages" class="btn btn-primary w-100 mt-4">{{ g.i18n.optimize_images }}</button>

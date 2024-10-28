@@ -49,20 +49,27 @@
     {% block styles %}{% endblock %}
 </head>
 <body class="page-container">
-<div id="header" class="py-2">
+<div id="header" class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-xxl">
         <div class="col-md-8 mx-auto text-center">
-            <a href="{% url "index" %}" class="link-dark text-decoration-none">PixSpeed.com</a>
+            <a id="webName" href="{% url "index" %}" class="link-dark text-decoration-none fw-bold">PixSpeed.com</a>
         </div>
     </div>
 </div>
-<div class="py-4">
+<div>
     {% block content %}{% endblock %}
 </div>
 <div id="footer" class="mt-5 mb-2 pt-5">
     <div class="container-xxl">
         <div class="col-md-8 mx-auto text-center">
             <h2>{{ g.total_images }}<br>Images optimized</h2><br>
+            <ul class="list-unstyled list-inline">
+                {% for language in g.languages %}
+                    <li>
+                        <a href="{{ request.path }}?{{ language.iso }}">{{ language.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
             Made by <a href="https://loualcala.com/" target="_blank">Lou Alcalá</a>
         </div>
     </div>
