@@ -58,5 +58,9 @@
   {
     "code_name": "optimize_images",
     "text": "Otimizar imagens"
+  },
+  {
+    "code_name": "images_deleted",
+    "text": "Todas as imagens são eliminadas após 1 hora"
   }
 ]
