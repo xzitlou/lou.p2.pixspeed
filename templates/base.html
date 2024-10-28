@@ -65,7 +65,7 @@
             <h2>{{ g.total_images }}<br>Images optimized</h2><br>
             <ul class="list-unstyled list-inline">
                 {% for language in g.languages %}
-                    <li>
+                    <li class="list-inline-item">
                         <a href="{{ request.path }}?{{ language.iso }}">{{ language.name }}</a>
                     </li>
                 {% endfor %}
