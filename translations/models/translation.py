@@ -1,7 +1,7 @@
 from django.db import models
 
 from app.utils import Utils
-from config import APP_VERSION
+from config import APP_VERSION, TRANSLATION_VERSION
 
 
 class Translation(models.Model):
