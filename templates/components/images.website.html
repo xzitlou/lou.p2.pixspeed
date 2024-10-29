@@ -17,27 +17,29 @@
             {% endfor %}
         </div>
     </div>
-    <div id="actionConvertWrapper">
-        <h4 class="mt-4">{{ g.i18n.convert_images }}</h4>
-        <div class="form-check form-switch">
-            <input class="form-check-input" name="format" value="" type="radio" id="originalCheck" checked>
-            <label class="form-check-label" for="originalCheck">{{ g.i18n.keep_format }}</label>
+    {% if not images|length %}
+        <div id="actionConvertWrapper">
+            <h4 class="mt-4">{{ g.i18n.convert_images }}</h4>
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="format" value="" type="radio" id="originalCheck" checked>
+                <label class="form-check-label" for="originalCheck">{{ g.i18n.keep_format }}</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="format" value="png" type="radio" id="pngCheck">
+                <label class="form-check-label" for="pngCheck">PNG</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="format" value="webp" type="radio" id="webpCheck">
+                <label class="form-check-label" for="webpCheck">WEBp</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="format" value="jpg" type="radio" id="jpgCheck">
+                <label class="form-check-label" for="jpgCheck">JPG</label>
+            </div>
+            <button id="processImages" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100 mt-4">{{ g.i18n.optimize_images }}</button>
         </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input" name="format" value="png" type="radio" id="pngCheck">
-            <label class="form-check-label" for="pngCheck">PNG</label>
+        <div id="actionDownloadWrapper" style="display: none">
+            <button id="downloadImages" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100 mt-4">{{ g.i18n.download_all }}</button>
         </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input" name="format" value="webp" type="radio" id="webpCheck">
-            <label class="form-check-label" for="webpCheck">WEBp</label>
-        </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input" name="format" value="jpg" type="radio" id="jpgCheck">
-            <label class="form-check-label" for="jpgCheck">JPG</label>
-        </div>
-        <button id="processImages" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100 mt-4">{{ g.i18n.optimize_images }}</button>
-    </div>
-    <div id="actionDownloadWrapper" style="display: none">
-        <button id="downloadImages" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100 mt-4">{{ g.i18n.download_all }}</button>
-    </div>
+    {% endif %}
 </div>
