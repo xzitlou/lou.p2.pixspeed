@@ -1,4 +1,67 @@
 {% extends "base.html" %}
+{% block schema %}
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "{{ g.i18n.home_title }}",
+          "url": "https://pixspeed.com",
+          "description": "{{ g.i18n.home_meta_description }}",
+          "inLanguage": "{{ g.lang.iso }}"
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://pixspeed.com"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "{{ g.i18n.how_it_works_schema_title_name }}",
+                "item": "https://pixspeed.com/how-it-works/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "{{ g.i18n.contact }}",
+                "item": "https://pixspeed.com/contact/"
+              }
+            ]
+          },
+          "mainEntity": {
+            "@type": "WebApplication",
+            "name": "PixSpeed",
+            "applicationCategory": "Image Optimization",
+            "operatingSystem": "All",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD",
+              "description": "{{ g.i18n.free_optimization }}",
+              "url": "https://pixspeed.com"
+            },
+            "featureList": [
+              "{{ g.i18n.feature_1 }}",
+              "{{ g.i18n.feature_2 }}",
+              "{{ g.i18n.feature_3 }}",
+              "{{ g.i18n.feature_4 }}"
+            ]
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PixSpeed",
+            "url": "https://pixspeed.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://pixspeed.com/static/favicon.png",
+            }
+          }
+        }
+    </script>
+{% endblock %}
 {% block content %}
     <div class="container py-5">
         <div class="row align-items-center pt-4">
