@@ -30,6 +30,25 @@ class WebExtractorAPIPage(View):
 
         WebsiteScrape.objects.create(url=website_url)
 
+        # Determinar si la URL es una imagen
+        if ".webp" in website_url or ".jpg" in website_url or ".jpeg" in website_url or ".png" in website_url:
+            img_url = website_url.split("?")[0]
+            absolute_url = requests.compat.urljoin(website_url, img_url)
+            filename = os.path.basename(absolute_url)
+            images = [{
+                "filename": filename,
+                "url": absolute_url
+            }]
+            html_content = render_to_string(
+                "components/images.website.html",
+                {
+                    "images": images,
+                    "g": settings,
+                }
+            )
+
+            return JsonResponse({"html": html_content})
+
         # Realizar una solicitud a la URL para extraer imágenes
         try:
             response = requests.get(website_url, headers={
