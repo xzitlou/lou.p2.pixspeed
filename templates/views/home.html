@@ -100,10 +100,52 @@
             $(document).ready(
                 function () {
                     var container = $(".page-container");
+                    var zipUrl;
 
                     container.on("submit", "#websiteForm", onSubmitWebsiteForm);
                     container.on("click", "#processImages", onProcessImages);
+                    container.on("click", "#downloadImages", onDownloadImages);
                     container.on("click", ".remove-item", onRemoveItem);
+
+                    function onDownloadImages(e) {
+                        if (zipUrl) {
+                            window.open(zipUrl, '_blank');
+                            return
+                        }
+
+                        e.preventDefault();
+
+                        var downloadButton = container.find("#downloadImages");
+
+                        downloadButton.prop("disabled", true);
+                        downloadButton.find(".spinner-border").removeClass("d-none");
+
+                        var uuidsList = container.find("a[data-uuid]").map(function () {
+                            return $(this).attr("data-uuid");
+                        }).get();
+
+                        console.log(uuidsList);
+
+                        $.ajax({
+                            url: "{{ g.api_domain }}/zip",
+                            type: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                uuids: uuidsList
+                            }),
+                            success: function (response) {
+                                zipUrl = response.url;
+                                window.open(zipUrl, '_blank');
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert("Error: " + textStatus + ": " + errorThrown);
+                            },
+                            complete: function () {
+                                downloadButton.prop("disabled", false);
+                                downloadButton.find(".spinner-border").addClass("d-none");
+                            }
+                        });
+                    }
 
                     function onRemoveItem(e) {
                         e.preventDefault();
@@ -115,7 +157,7 @@
                     }
 
                     function onProcessImages() {
-                        container.find("#processImages").remove();
+                        container.find("#actionConvertWrapper").remove();
                         $('html, body').animate({
                             scrollTop: $("#listImages").offset().top
                         }, 500);
@@ -127,6 +169,7 @@
                     function processImagesSequentially(images) {
                         if (images.length === 0) {
                             console.log("All images have been processed.");
+                            container.find("#actionDownloadWrapper").show();
                             return;
                         }
 
@@ -145,12 +188,12 @@
                             },
                             success: function (response) {
                                 var additionalClass = "text-success";
-                                
+
                                 if (!response.decreased) {
                                     additionalClass = "text-danger"
                                 }
-                                
-                                resultDiv.html(`<div class="text-center"><div class="fw-bold ${additionalClass}">${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">{{ g.i18n.download }}</a>`);
+
+                                resultDiv.html(`<div class="text-center"><div class="fw-bold ${additionalClass}">${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}" data-uuid="${response.uuid}">{{ g.i18n.download }}</a>`);
                                 currentImage.removeAttr("data-url");
 
                                 $.ajax({
