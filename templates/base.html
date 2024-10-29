@@ -24,7 +24,7 @@
         {
             "@context": "http://schema.org",
             "@type": "Organization",
-            "url": "https://pixspeed.com/",
+            "url": "https://pixspeed.com/?lang={{ g.lang.iso }}",
             "logo": "https://pixspeed.com/static/favicon.png",
             "sameAs": [],
             "description": "{{ description | safe }}",
@@ -107,10 +107,10 @@
                 <a href="{% url "privacy" %}">{{ g.i18n.privacy_policy }}</a>
             </li>
             <li class="list-inline-item">
-                <a href="{% url "contact" %}">{{ g.i18n.contact }}</a>
+                <a href="{% url "contact" %}?lang={{ g.lang.iso }}">{{ g.i18n.contact }}</a>
             </li>
         </ul>
-        Made by <a href="https://loualcala.com/" target="_blank">Lou Alcalá</a>
+        Made by <a href="https://loualcala.com/?lang={{ g.lang.iso }}" target="_blank">Lou Alcalá</a>
     </div>
 </div>
 <script src="/static/js/jquery-3.7.1.min.js"></script>
