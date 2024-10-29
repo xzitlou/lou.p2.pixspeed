@@ -124,8 +124,6 @@
                             return $(this).attr("data-uuid");
                         }).get();
 
-                        console.log(uuidsList);
-
                         $.ajax({
                             url: "{{ g.api_domain }}/zip",
                             type: "POST",
@@ -216,6 +214,7 @@
                     }
 
                     function onSubmitWebsiteForm(e) {
+                        zipUrl = null;
                         e.preventDefault();
                         var target = $(this);
                         var submitButton = target.find("#submitButton");
