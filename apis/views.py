@@ -17,7 +17,7 @@ class WebExtractorAPIPage(View):
     @staticmethod
     def post(request, *args, **kwargs):
         settings = GlobalVars.get_globals(request)
-        website_url = request.POST.get("website", "").strip()
+        website_url = request.POST.get("website", "").strip().lower()
 
         # Validar la URL
         validator = URLValidator()
