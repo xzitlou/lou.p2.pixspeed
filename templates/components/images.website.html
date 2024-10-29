@@ -1,19 +1,40 @@
 <div class="highlight p-3 border rounded-2">
     <div class="images-found">
         <div class="total-images-found text-center"><b>{{ images | length }}</b> {{ g.i18n.images_found }}</div>
-        {% for image in images %}
-            <div class="d-flex align-items-center" data-url="{{ image.url }}">
-                <div class="icon flex-shrink-0">
-                    <img src="{{ image.url }}">
+        <div class="found-images-list">
+            {% for image in images %}
+                <div class="d-flex align-items-center" data-url="{{ image.url }}">
+                    <div class="icon flex-shrink-0">
+                        <img src="{{ image.url }}">
+                    </div>
+                    <div class="name fw-bold ms-2 flex-grow-1 me-2">{{ image.filename }}</div>
+                    <div class="result ms-auto d-flex align-items-center flex-shrink-0">
+                        <button class="btn btn-outline-danger btn-sm remove-item">{{ g.i18n.remove }}</button>
+                    </div>
                 </div>
-                <div class="name fw-bold ms-2 flex-grow-1 me-2">{{ image.filename }}</div>
-                <div class="result ms-auto d-flex align-items-center flex-shrink-0">
-                    <button class="btn btn-outline-danger btn-sm remove-item">{{ g.i18n.remove }}</button>
-                </div>
-            </div>
-        {% empty %}
-            <div class="alert alert-warning">{{ g.i18n.no_images_found }}</div>
-        {% endfor %}
+            {% empty %}
+                <div class="alert alert-warning">{{ g.i18n.no_images_found }}</div>
+            {% endfor %}
+        </div>
     </div>
-    <button id="processImages" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100 mt-4">{{ g.i18n.optimize_images }}</button>
+    <div id="actionConvertWrapper">
+        <h4 class="mt-4">{{ g.i18n.convert_images }}</h4>
+        <div class="form-check form-switch">
+            <input class="form-check-input" name="format" value="" type="radio" id="originalCheck" checked>
+            <label class="form-check-label" for="originalCheck">{{ g.i18n.keep_format }}</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" name="format" value="png" type="radio" id="pngCheck">
+            <label class="form-check-label" for="pngCheck">PNG</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" name="format" value="webp" type="radio" id="webpCheck">
+            <label class="form-check-label" for="webpCheck">WEBp</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" name="format" value="jpg" type="radio" id="jpgCheck">
+            <label class="form-check-label" for="jpgCheck">JPG</label>
+        </div>
+        <button id="processImages" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100 mt-4">{{ g.i18n.optimize_images }}</button>
+    </div>
 </div>

@@ -139,9 +139,18 @@
                         $.ajax({
                             url: "{{ g.api_domain }}/url",
                             type: "POST",
-                            data: {url: imageUrl},
+                            data: {
+                                url: imageUrl,
+                                format: container.find('input[name="format"]:checked').val()
+                            },
                             success: function (response) {
-                                resultDiv.html(`<div class="text-center"><div class="fw-bold">-${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">{{ g.i18n.download }}</a>`);
+                                var additionalClass = "text-success";
+                                
+                                if (!response.decreased) {
+                                    additionalClass = "text-danger"
+                                }
+                                
+                                resultDiv.html(`<div class="text-center"><div class="fw-bold ${additionalClass}">${response.size_reduction}%</div><div class="small">${response.optimized_size}kb</div></div><a class="btn btn-sm btn-success ms-2" href="${response.url}">{{ g.i18n.download }}</a>`);
                                 currentImage.removeAttr("data-url");
 
                                 $.ajax({
@@ -177,6 +186,9 @@
                             data: $(this).serialize(),
                             success: function (response) {
                                 container.find("#listImages").html(response.html);
+                                $('html, body').animate({
+                                    scrollTop: $("#listImages").offset().top
+                                }, 500);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 alert("Error: " + textStatus + ": " + errorThrown);
