@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block schema %}
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "{{ g.i18n.how_it_works_schema_title_name }}",
+          "url": "https://pixspeed.com/how-it-works/",
+          "description": "{{ g.i18n.how_it_works_schema_description }}",
+          "mainEntity": {
+            "@type": "HowTo",
+            "name": "{{ g.i18n.how_it_works_schema_name }}",
+            "description": "{{ g.i18n.how_it_works_schema_name_description }}",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "name": "{{ g.i18n.how_it_works_schema_step_1 }}",
+                "text": "{{ g.i18n.how_it_works_schema_description_1 }}"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "{{ g.i18n.how_it_works_schema_step_2 }}",
+                "text": "{{ g.i18n.how_it_works_schema_description_2 }}"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "{{ g.i18n.how_it_works_schema_step_3 }}",
+                "text": "{{ g.i18n.how_it_works_schema_description_3 }}"
+              }
+            ]
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "PixSpeed",
+            "url": "https://pixspeed.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://pixspeed.com/static/favicon.png"
+            }
+          }
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="position-sticky" style="top: 50px">
+                    <h1 class="page-header mb-3 fw-semibold lh-1">{{ g.i18n.how_it_works }}</h1>
+                    <p>{{ g.i18n.how_it_works_subtitle }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="bsb-timeline-1 pt-5 pt-xl-8 ms-2">
+                    <ul class="timeline">
+                        <li class="timeline-item">
+                            <div class="timeline-body">
+                                <div class="timeline-content">
+                                    <div class="card border-0">
+                                        <div class="card-body p-0">
+                                            <h5 class="card-subtitle mb-1 fw-bold">1: {{ g.i18n.upload_your_images }}</h5>
+                                            <p class="card-text m-0">{{ g.i18n.upload_your_images_description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-body">
+                                <div class="timeline-content">
+                                    <div class="card border-0">
+                                        <div class="card-body p-0">
+                                            <h5 class="card-subtitle mb-1 fw-bold">2: {{ g.i18n.automated_optimization }}</h5>
+                                            <p class="card-text m-0">{{ g.i18n.automated_optimization_description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-body">
+                                <div class="timeline-content">
+                                    <div class="card border-0">
+                                        <div class="card-body p-0">
+                                            <h5 class="card-subtitle mb-1 fw-bold">3: {{ g.i18n.download_optimized_images }}</h5>
+                                            <p class="card-text m-0">{{ g.i18n.download_optimized_images_description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-item">
+                            <div class="timeline-body">
+                                <div class="timeline-content">
+                                    <div class="card border-0">
+                                        <div class="card-body p-0">
+                                            <h5 class="card-subtitle mb-1 fw-bold">4: {{ g.i18n.implement_images }}</h5>
+                                            <p class="card-text m-0">{{ g.i18n.implement_images_description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5 pt-5">
+            <div class="col-sm-6 mx-auto">
+                <h2>{{ g.i18n.why_use }}</h2>
+                <p>{{ g.i18n.why_use_description }}</p>
+            </div>
+        </div>
+        <div class="text-center mt-5 pt-5">
+            <div class="col-sm-6 mx-auto">
+                <h2>{{ g.i18n.try_now }}</h2>
+                <p>{{ g.i18n.try_now_description }}</p>
+                <a href="{% url "index" %}?lang={{ g.lang.iso }}" class="mt-3 rounded-pill d-block btn btn-primary btn-lg">{{ g.i18n.start_now }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

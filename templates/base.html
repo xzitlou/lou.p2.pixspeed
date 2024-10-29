@@ -53,6 +53,7 @@
         <link rel="alternate" hreflang="{{ lang.iso }}" href="{{ request.path }}?lang={{ lang.iso }}"/>
     {% endfor %}
     {% block styles %}{% endblock %}
+    {% block schema %}{% endblock %}
 </head>
 <body class="page-container">
 <div id="header">
@@ -71,7 +72,7 @@
                         <a class="nav-link" aria-current="page" href="{% url "index" %}?lang={{ g.lang.iso }}">{{ g.i18n.optimize_images }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">{{ g.i18n.how_it_works }}</a>
+                        <a class="nav-link" aria-current="page" href="{% url "how-it-works" %}?lang={{ g.lang.iso }}">{{ g.i18n.how_it_works }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">FAQ</a>
