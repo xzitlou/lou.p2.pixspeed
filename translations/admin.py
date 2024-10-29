@@ -16,7 +16,7 @@ class TranslationAdmin(admin.ModelAdmin):
 
 
 class TextBaseAdmin(admin.ModelAdmin):
-    list_display = ('code_name', 'text',)
+    list_display = ('code_name', 'text', "translated",)
     search_fields = ('code_name', 'text',)
 
 

@@ -20,3 +20,4 @@ static/chunks/*
 /static/codes/
 django_cache
 !conversions/files/*.txt
+gcreds.json
