@@ -15,11 +15,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = str(BASE_DIR / 'gcreds.json')
         translate_client = translate.Client()
+        text_base_list = TextBase.objects.filter(
+            translated=False
+        )
 
         for language in Language.objects.all():
-            for text_base in TextBase.objects.filter(
-                    translated=False
-            ):
+            for text_base in text_base_list:
                 if language.iso != "en":
                     translation = translate_client.translate(
                         text_base.text,
