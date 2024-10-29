@@ -117,7 +117,7 @@ class HowItWorksPage(View):
             request,
             "views/how-it-works.html",
             {
-                "title": f"{settings.get('i18n').get('how_it_works_title')} - PixSpeed.com",
+                "title": f"{settings.get('i18n').get('how_it_works')} - PixSpeed.com",
                 "description": settings.get("i18n").get("how_it_works_title_meta_description"),
                 "page": "privacy",
                 "g": settings
