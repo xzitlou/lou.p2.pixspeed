@@ -14,31 +14,26 @@ class Message(models.Model):
         return self.email
 
     @staticmethod
-    def save_message(data, settings: dict):
-        i18n = settings.get("i18n")
-        email = data.get("contactEmail")
-        message = data.get("contactMessage")
+    def save_message(data, i18n: dict):
+        i18n = i18n or {}
+        email = data.get("email_address")
+        message = data.get("message")
         errors = []
 
-        if not email:
-            errors.append(i18n.get("missing_email", "missing_email"))
-        else:
-            try:
-                email = email.lower()
-                validate_email(email)
-            except:
-                errors.append(i18n.get("invalid_email", "invalid_email"))
+        try:
+            email = email.lower()
+            validate_email(email)
+        except Exception as e:
+            print(str(e))
+            errors.append(i18n.get("invalid_email", "invalid_email"))
 
         if not message:
             errors.append(i18n.get("missing_message", "missing_message"))
 
         if len(errors):
-            return None, errors
+            return errors
 
-        message = Message.objects.create(
+        Message.objects.create(
             email=email,
             message=message
         )
-        message.save()
-
-        return message, None

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container py-5">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-6">
+                <div>
+                    <a href="{% url "index" %}?lang={{ g.lang.iso }}" class="btn btn-light">← PixSpeed.com</a>
+                </div>
+                <br>
+                <h1 class="main-title">{{ g.i18n.contact_us }}</h1>
+                <br>
+                {% if data.status %}
+                    <div class="alert alert-success">{{ g.i18n.message_sent }}</div>
+                {% endif %}
+                {% if errors %}
+                    <div class="alert alert-danger">
+                        {% for error in errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form action="{{ request.path }}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group mb-2">
+                        <label for="emailAddress">{{ g.i18n.email_address }}</label>
+                        <input id="emailAddress" type="email" name="email_address" class="form-control py-3" placeholder="lou@alcala.com">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="message">{{ g.i18n.message }}</label>
+                        <textarea name="message" id="message" rows="4" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group captcha-formgroup mb-2">
+                        {{ form }}
+                    </div>
+                    <button class="btn btn-primary btn-block w-100" tabindex="3">{{ g.i18n.send }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

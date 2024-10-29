@@ -10,6 +10,7 @@ admin.site.site_title = "TL;DR AI"
 urlpatterns = [
     path("batcave/", admin.site.urls),
     path("favicon.ico", RedirectView.as_view(url="/static/favicon.png")),
+    path("captcha/", include("captcha.urls")),
     path("", IndexPage.as_view(), name="index"),
     path("api/web/", WebExtractorAPIPage.as_view(), name="web-extractor"),
     path("api/counter/", ImageCounterAPI.as_view(), name="api-counter"),

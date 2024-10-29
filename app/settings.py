@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'contact_messages',
     'commons',
     'translations',
+    "captcha",
 ]
 
 MIDDLEWARE = [
@@ -110,3 +111,7 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CAPTCHA_IMAGE_SIZE = (150, 50)
+CAPTCHA_FONT_SIZE = 35
+CAPTCHA_LENGTH = 5
+CAPTCHA_FOREGROUND_COLOR = '#00273B'
