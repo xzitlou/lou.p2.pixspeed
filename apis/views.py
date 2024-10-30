@@ -64,18 +64,34 @@ class WebExtractorAPIPage(View):
 
         # Extraer las URLs de las imágenes usando BeautifulSoup
         soup = BeautifulSoup(response.text, "html.parser")
-        html_text = soup.prettify()
+        img_urls = [img["src"] for img in soup.find_all("img") if img.get("src")]
 
-        # Expresión regular para capturar URLs de imágenes
-        img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|webp|gif))'
-        img_urls = re.findall(img_regex, html_text)
-        img_urls = list(set(img_urls))
-
+        # Convertir URLs relativas a absolutas
         images = []
         for img_url in img_urls:
             if ".webp" in img_url or ".jpg" in img_url or ".jpeg" in img_url or ".png" in img_url:
                 img_url = img_url.split("?")[0]
                 absolute_url = requests.compat.urljoin(website_url, img_url)
+                filename = os.path.basename(absolute_url)
+                images.append({
+                    "filename": filename,
+                    "url": absolute_url
+                })
+
+        # Buscar URLs de imágenes en el HTML como texto completo
+        html_content = response.text  # Obtener HTML completo
+        img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|webp)|\/\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\bimg\/[^\s]+?\.(?:jpg|jpeg|png|webp))'
+        text_img_urls = re.findall(img_regex, html_content)
+
+        # Convertir URLs encontradas en el HTML como texto a absolutas
+        for img_url in text_img_urls:
+            if img_url.startswith("//"):
+                img_url = "https:" + img_url  # Agregar protocolo si falta
+            # Asegurar que `website_url` termine en '/' si `img_url` es relativo y no comienza con '/'
+            base_url = website_url if img_url.startswith('/') else website_url.rstrip('/') + '/'
+            absolute_url = requests.compat.urljoin(base_url, img_url)
+
+            if absolute_url not in [image["url"] for image in images]:  # Evitar duplicados
                 filename = os.path.basename(absolute_url)
                 images.append({
                     "filename": filename,
