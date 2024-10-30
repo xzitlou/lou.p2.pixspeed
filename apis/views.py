@@ -1,4 +1,5 @@
 import os
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -63,9 +64,13 @@ class WebExtractorAPIPage(View):
 
         # Extraer las URLs de las imágenes usando BeautifulSoup
         soup = BeautifulSoup(response.text, "html.parser")
-        img_urls = [img["src"] for img in soup.find_all("img") if img.get("src")]
+        html_text = soup.prettify()
 
-        # Convertir URLs relativas a absolutas
+        # Expresión regular para capturar URLs de imágenes
+        img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|webp|gif))'
+        img_urls = re.findall(img_regex, html_text)
+        img_urls = list(set(img_urls))
+
         images = []
         for img_url in img_urls:
             if ".webp" in img_url or ".jpg" in img_url or ".jpeg" in img_url or ".png" in img_url:
