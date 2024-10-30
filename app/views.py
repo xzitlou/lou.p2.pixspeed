@@ -125,3 +125,30 @@ class HowItWorksPage(View):
         )
 
         return response
+
+
+class FAQPage(View):
+    @staticmethod
+    def get(request):
+        settings = GlobalVars.get_globals(request)
+
+        faqs = []
+        for i in range(1,9):
+            faqs.append({
+                "question": settings.get("i18n").get(f"faq_{i}", ""),
+                "value": settings.get("i18n").get(f"faq_content_{i}", ""),
+            })
+
+        response = render(
+            request,
+            "views/faq.html",
+            {
+                "title": f"{settings.get('i18n').get('faq_title')} - PixSpeed.com",
+                "description": settings.get("i18n").get("faq_meta_description"),
+                "page": "privacy",
+                "g": settings,
+                "faqs": faqs
+            }
+        )
+
+        return response

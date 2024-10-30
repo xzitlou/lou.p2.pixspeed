@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 
 from accounts.views.account import LoginPage, LostPasswordPage, RestorePasswordPage, LogoutPage, VerificationPage, SignupPage
-from app.views import TermsPage, PrivacyPage, IndexPage, ThanksPage, HowItWorksPage
+from app.views import TermsPage, PrivacyPage, IndexPage, ThanksPage, HowItWorksPage, FAQPage
 from contact_messages.views import ContactPage
 
 admin.site.site_title = "PixSpeed.com"
@@ -25,4 +25,5 @@ urlpatterns = [
     path("terms/", TermsPage.as_view(), name="terms"),
     path("privacy/", PrivacyPage.as_view(), name="privacy"),
     path("how-it-works/", HowItWorksPage.as_view(), name="how-it-works"),
+    path("frequently-asked-questions/", FAQPage.as_view(), name="faq"),
 ]
