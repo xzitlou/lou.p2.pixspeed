@@ -9,6 +9,8 @@ from django.core.validators import URLValidator
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views import View
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
 from app.utils import Utils
 from app.views import GlobalVars
@@ -52,21 +54,37 @@ class WebExtractorAPIPage(View):
 
             return JsonResponse({"html": html_content})
 
-        # Realizar una solicitud a la URL para extraer imágenes
+        ## Colocar aquí la lógica con selenium
         try:
-            response = requests.get(website_url, headers={
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Safari/537.36",
-                "Referer": website_url
-            })
-            response.raise_for_status()
+            # Configurar Firefox en modo headless
+            options = Options()
+            options.add_argument("--headless")
+            driver = webdriver.Firefox(options=options)
+            driver.get(website_url)
+            html_text = driver.page_source  # Extraer el HTML completo después de renderizar el JavaScript
+            driver.quit()
         except Exception as e:
-            bugsnag.notify(Exception(f'WebExtractorAPIPage [fetch_webpage]: {str(e)}'))
-            return JsonResponse({
-                "error": f'{settings.get("i18n").get("failed_fetch_webpage")}'
-            }, status=500)
+            print(str(e))
+            bugsnag.notify(Exception(f'WebExtractorAPIPage [selenium_fetch]: {str(e)}'))
+            html_text = None
+
+        # Realizar una solicitud a la URL para extraer imágenes
+        if not html_text:
+            try:
+                response = requests.get(website_url, headers={
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Safari/537.36",
+                    "Referer": website_url
+                })
+                response.raise_for_status()
+                html_text = response.text
+            except Exception as e:
+                bugsnag.notify(Exception(f'WebExtractorAPIPage [fetch_webpage]: {str(e)}'))
+                return JsonResponse({
+                    "error": f'{settings.get("i18n").get("failed_fetch_webpage")}'
+                }, status=500)
 
         # Extraer las URLs de las imágenes usando BeautifulSoup
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup = BeautifulSoup(html_text, "html.parser")
         img_urls = [img["src"] for img in soup.find_all("img") if img.get("src")]
 
         # Convertir URLs relativas a absolutas
@@ -82,7 +100,7 @@ class WebExtractorAPIPage(View):
                 })
 
         # Buscar URLs de imágenes en el HTML como texto completo
-        html_content = response.text  # Obtener HTML completo
+        html_content = html_text  # Obtener HTML completo
         img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|webp)|\/\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\bimg\/[^\s]+?\.(?:jpg|jpeg|png|webp))'
         text_img_urls = re.findall(img_regex, html_content)
 
