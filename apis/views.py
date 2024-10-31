@@ -59,6 +59,7 @@ class WebExtractorAPIPage(View):
 
         ## Colocar aquí la lógica con selenium
         html_text = None
+        driver = None
 
         try:
             options = Options()
@@ -81,7 +82,8 @@ class WebExtractorAPIPage(View):
             print(str(e))
             bugsnag.notify(Exception(f'WebExtractorAPIPage [selenium_fetch]: {str(e)}'))
         finally:
-            driver.quit()
+            if driver:
+                driver.quit()
 
         # Realizar una solicitud a la URL para extraer imágenes
         if not html_text:
