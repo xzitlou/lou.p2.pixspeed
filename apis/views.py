@@ -5,6 +5,7 @@ import bugsnag
 import requests
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from django.core.validators import URLValidator
 from django.http import JsonResponse
@@ -72,7 +73,8 @@ class WebExtractorAPIPage(View):
             if DEBUG:
                 driver = webdriver.Firefox(options=options)
             else:
-                driver = webdriver.Firefox(options=options, executable_path="/usr/local/bin/geckodriver")
+                service = Service("/usr/local/bin/geckodriver")
+                driver = webdriver.Firefox(service=service, options=options)
 
             driver.set_page_load_timeout(15)  # Tiempo de espera de carga de página
 
