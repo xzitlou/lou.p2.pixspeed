@@ -4,13 +4,16 @@ import re
 import bugsnag
 import requests
 from bs4 import BeautifulSoup
-from django.core.exceptions import ValidationError
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from django.core.validators import URLValidator
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views import View
 from selenium import webdriver
+from selenium.common import TimeoutException
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
 
 from app.utils import Utils
 from app.views import GlobalVars
@@ -57,18 +60,28 @@ class WebExtractorAPIPage(View):
         ## Colocar aquí la lógica con selenium
         html_text = None
 
-        """
         try:
             options = Options()
             options.add_argument("--headless")
             driver = webdriver.Firefox(options=options)
+            driver.set_page_load_timeout(15)  # Tiempo de espera de carga de página
+
             driver.get(website_url)
-            html_text = driver.page_source
-            driver.quit()
+
+            # Espera hasta que el <body> esté cargado para asegurar el HTML básico
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body"))
+            )
+
+            html_text = driver.page_source  # Obtiene el HTML actual de la página
+        except TimeoutException:
+            print("Tiempo de espera excedido al cargar la página.")
+            html_text = driver.page_source  # Obtener HTML disponible si hay timeout
         except Exception as e:
             print(str(e))
             bugsnag.notify(Exception(f'WebExtractorAPIPage [selenium_fetch]: {str(e)}'))
-        """
+        finally:
+            driver.quit()
 
         # Realizar una solicitud a la URL para extraer imágenes
         if not html_text:
