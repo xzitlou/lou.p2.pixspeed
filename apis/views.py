@@ -25,7 +25,8 @@ class WebExtractorAPIPage(View):
         validator = URLValidator()
         try:
             validator(website_url)
-        except ValidationError:
+        except Exception as e:
+            bugsnag.notify(Exception(f'WebExtractorAPIPage [invalid_url]: {str(e)}'))
             return JsonResponse({
                 "error": settings.get("i18n").get("invalid_url")
             }, status=400)
