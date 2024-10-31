@@ -4,6 +4,7 @@ import re
 import bugsnag
 import requests
 from bs4 import BeautifulSoup
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from django.core.validators import URLValidator
@@ -14,7 +15,6 @@ from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 
-from app.settings import DEBUG
 from app.utils import Utils
 from app.views import GlobalVars
 from commons.models.website_scrape import WebsiteScrape
@@ -61,21 +61,15 @@ class WebExtractorAPIPage(View):
         html_text = None
         driver = None
 
-        """
         try:
-            options = webdriver.FirefoxOptions()
+            options = Options()
             options.add_argument("--headless")
             options.add_argument("--disable-gpu")  # Mejora el rendimiento en servidores
             options.add_argument("--no-sandbox")  # Evita problemas de permisos en entornos root
             options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--use-gl=desktop")
 
-            if DEBUG:
-                driver = webdriver.Firefox(options=options)
-            else:
-                service = webdriver.FirefoxService(executable_path="/usr/local/bin/geckodriver", log_output="/var/log/pixspeed/geckodriver.log")
-                driver = webdriver.Firefox(service=service, options=options)
-
+            driver = webdriver.Chrome(options=options)
             driver.set_page_load_timeout(15)  # Tiempo de espera de carga de página
 
             driver.get(website_url)
@@ -94,7 +88,6 @@ class WebExtractorAPIPage(View):
         finally:
             if driver:
                 driver.quit()
-        """
 
         # Realizar una solicitud a la URL para extraer imágenes
         if html_text:
