@@ -86,7 +86,30 @@ class WebExtractorAPIPage(View):
                 driver.quit()
 
         # Realizar una solicitud a la URL para extraer imágenes
-        if not html_text:
+        if html_text:
+            # Extraer las URLs de las imágenes usando BeautifulSoup
+            soup = BeautifulSoup(html_text, "html.parser")
+            img_urls = [img["src"] for img in soup.find_all("img") if img.get("src")]
+
+            # Convertir URLs relativas a absolutas
+            images = []
+            for img_url in img_urls:
+                img_url = img_url.split("?")[0]
+
+                # Convertir a URL absoluta utilizando siempre la URL base
+                absolute_url = requests.compat.urljoin(website_url, img_url)
+
+                # Filtrar extensiones deseadas
+                if any(ext in absolute_url for ext in [".webp", ".jpg", ".jpeg", ".png"]):
+                    filename = os.path.basename(absolute_url)
+
+                    # Agregar imagen solo si no es un duplicado
+                    if absolute_url not in [image["url"] for image in images]:
+                        images.append({
+                            "filename": filename,
+                            "url": absolute_url
+                        })
+        else:
             try:
                 response = requests.get(website_url, headers={
                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Safari/537.36",
@@ -100,41 +123,48 @@ class WebExtractorAPIPage(View):
                     "error": f'{settings.get("i18n").get("failed_fetch_webpage")}'
                 }, status=500)
 
-        # Extraer las URLs de las imágenes usando BeautifulSoup
-        soup = BeautifulSoup(html_text, "html.parser")
-        img_urls = [img["src"] for img in soup.find_all("img") if img.get("src")]
+            # Extraer las URLs de las imágenes usando BeautifulSoup
+            soup = BeautifulSoup(html_text, "html.parser")
+            img_urls = [img["src"] for img in soup.find_all("img") if img.get("src")]
 
-        # Convertir URLs relativas a absolutas
-        images = []
-        for img_url in img_urls:
-            if ".webp" in img_url or ".jpg" in img_url or ".jpeg" in img_url or ".png" in img_url:
+            # Convertir URLs relativas a absolutas
+            images = []
+            for img_url in img_urls:
                 img_url = img_url.split("?")[0]
+
+                # Convertir a URL absoluta utilizando siempre la URL base
                 absolute_url = requests.compat.urljoin(website_url, img_url)
-                filename = os.path.basename(absolute_url)
-                images.append({
-                    "filename": filename,
-                    "url": absolute_url
-                })
 
-        # Buscar URLs de imágenes en el HTML como texto completo
-        html_content = html_text  # Obtener HTML completo
-        img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|webp)|\/\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\bimg\/[^\s]+?\.(?:jpg|jpeg|png|webp))'
-        text_img_urls = re.findall(img_regex, html_content)
+                # Filtrar extensiones deseadas
+                if any(ext in absolute_url for ext in [".webp", ".jpg", ".jpeg", ".png"]):
+                    filename = os.path.basename(absolute_url)
 
-        # Convertir URLs encontradas en el HTML como texto a absolutas
-        for img_url in text_img_urls:
-            if img_url.startswith("//"):
-                img_url = "https:" + img_url  # Agregar protocolo si falta
-            # Asegurar que `website_url` termine en '/' si `img_url` es relativo y no comienza con '/'
-            base_url = website_url if img_url.startswith('/') else website_url.rstrip('/') + '/'
-            absolute_url = requests.compat.urljoin(base_url, img_url)
+                    # Agregar imagen solo si no es un duplicado
+                    if absolute_url not in [image["url"] for image in images]:
+                        images.append({
+                            "filename": filename,
+                            "url": absolute_url
+                        })
 
-            if absolute_url not in [image["url"] for image in images]:  # Evitar duplicados
-                filename = os.path.basename(absolute_url)
-                images.append({
-                    "filename": filename,
-                    "url": absolute_url
-                })
+            # Buscar URLs de imágenes en el HTML como texto completo
+            html_content = html_text  # Obtener HTML completo
+            img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|webp)|\/\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\bimg\/[^\s]+?\.(?:jpg|jpeg|png|webp))'
+            text_img_urls = re.findall(img_regex, html_content)
+
+            # Convertir URLs encontradas en el HTML como texto a absolutas
+            for img_url in text_img_urls:
+                if img_url.startswith("//"):
+                    img_url = "https:" + img_url  # Agregar protocolo si falta
+                # Asegurar que `website_url` termine en '/' si `img_url` es relativo y no comienza con '/'
+                base_url = website_url if img_url.startswith('/') else website_url.rstrip('/') + '/'
+                absolute_url = requests.compat.urljoin(base_url, img_url)
+
+                if absolute_url not in [image["url"] for image in images]:  # Evitar duplicados
+                    filename = os.path.basename(absolute_url)
+                    images.append({
+                        "filename": filename,
+                        "url": absolute_url
+                    })
 
         html_content = render_to_string(
             "components/images.website.html",
