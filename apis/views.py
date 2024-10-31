@@ -67,6 +67,7 @@ class WebExtractorAPIPage(View):
             options.add_argument("--disable-gpu")  # Mejora el rendimiento en servidores
             options.add_argument("--no-sandbox")  # Evita problemas de permisos en entornos root
             options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--use-gl=desktop")
 
             if DEBUG:
                 driver = webdriver.Firefox(options=options)
