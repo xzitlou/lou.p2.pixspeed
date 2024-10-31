@@ -15,6 +15,7 @@ from selenium.common import TimeoutException
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 
+from app.settings import DEBUG
 from app.utils import Utils
 from app.views import GlobalVars
 from commons.models.website_scrape import WebsiteScrape
@@ -64,7 +65,15 @@ class WebExtractorAPIPage(View):
         try:
             options = Options()
             options.add_argument("--headless")
-            driver = webdriver.Firefox(options=options)
+            options.add_argument("--disable-gpu")  # Mejora el rendimiento en servidores
+            options.add_argument("--no-sandbox")  # Evita problemas de permisos en entornos root
+            options.add_argument("--disable-dev-shm-usage")
+
+            if DEBUG:
+                driver = webdriver.Firefox(options=options)
+            else:
+                driver = webdriver.Firefox(options=options, executable_path="/usr/local/bin/geckodriver")
+
             driver.set_page_load_timeout(15)  # Tiempo de espera de carga de página
 
             driver.get(website_url)
@@ -75,11 +84,10 @@ class WebExtractorAPIPage(View):
             )
 
             html_text = driver.page_source  # Obtiene el HTML actual de la página
-        except TimeoutException:
-            print("Tiempo de espera excedido al cargar la página.")
+        except TimeoutException as e:
+            bugsnag.notify(Exception(f'WebExtractorAPIPage [selenium_fetch]: {str(e)}'))
             html_text = driver.page_source  # Obtener HTML disponible si hay timeout
         except Exception as e:
-            print(str(e))
             bugsnag.notify(Exception(f'WebExtractorAPIPage [selenium_fetch]: {str(e)}'))
         finally:
             if driver:
