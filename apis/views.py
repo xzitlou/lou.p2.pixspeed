@@ -60,7 +60,7 @@ class WebExtractorAPIPage(View):
         except Exception as e:
             bugsnag.notify(Exception(f'WebExtractorAPIPage [fetch_webpage]: {str(e)}'))
             return JsonResponse({
-                "error": f'{settings.get("i18n").get("failed_fetch_webpage")}: {str(e)}'
+                "error": f'{settings.get("i18n").get("failed_fetch_webpage")}'
             }, status=500)
 
         # Extraer las URLs de las imágenes usando BeautifulSoup
