@@ -61,6 +61,7 @@ class WebExtractorAPIPage(View):
         html_text = None
         driver = None
 
+        """
         try:
             options = webdriver.FirefoxOptions()
             options.add_argument("--headless")
@@ -93,6 +94,7 @@ class WebExtractorAPIPage(View):
         finally:
             if driver:
                 driver.quit()
+        """
 
         # Realizar una solicitud a la URL para extraer imágenes
         if html_text:
