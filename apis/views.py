@@ -73,7 +73,7 @@ class WebExtractorAPIPage(View):
             if DEBUG:
                 driver = webdriver.Firefox(options=options)
             else:
-                service = Service(executable_path="/usr/local/bin/geckodriver", log_path="geckodriver.log")
+                service = Service(executable_path="/usr/local/bin/geckodriver", log_path="/var/log/pixspeed/geckodriver.log")
                 driver = webdriver.Firefox(service=service, options=options)
 
             driver.set_page_load_timeout(15)  # Tiempo de espera de carga de página
