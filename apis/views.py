@@ -55,18 +55,20 @@ class WebExtractorAPIPage(View):
             return JsonResponse({"html": html_content})
 
         ## Colocar aquí la lógica con selenium
+        html_text = None
+
+        """
         try:
-            # Configurar Firefox en modo headless
             options = Options()
             options.add_argument("--headless")
             driver = webdriver.Firefox(options=options)
             driver.get(website_url)
-            html_text = driver.page_source  # Extraer el HTML completo después de renderizar el JavaScript
+            html_text = driver.page_source
             driver.quit()
         except Exception as e:
             print(str(e))
             bugsnag.notify(Exception(f'WebExtractorAPIPage [selenium_fetch]: {str(e)}'))
-            html_text = None
+        """
 
         # Realizar una solicitud a la URL para extraer imágenes
         if not html_text:
