@@ -233,7 +233,13 @@
                                 }, 500);
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
-                                alert("Error: " + textStatus + ": " + errorThrown);
+                                var errorMessage = "Error: " + textStatus + ": " + errorThrown;
+
+                                if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+                                    errorMessage = "Error: " + jqXHR.responseJSON.error;
+                                }
+
+                                alert(errorMessage);
                             },
                             complete: function () {
                                 submitButton.prop("disabled", false);

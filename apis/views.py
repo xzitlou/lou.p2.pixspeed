@@ -1,6 +1,7 @@
 import os
 import re
 
+import bugsnag
 import requests
 from bs4 import BeautifulSoup
 from django.core.exceptions import ValidationError
@@ -57,7 +58,7 @@ class WebExtractorAPIPage(View):
             })
             response.raise_for_status()
         except Exception as e:
-            print(str(e))
+            bugsnag.notify(Exception(f'WebExtractorAPIPage [fetch_webpage]: {str(e)}'))
             return JsonResponse({
                 "error": f'{settings.get("i18n").get("failed_fetch_webpage")}: {str(e)}'
             }, status=500)
