@@ -14,6 +14,8 @@ class CounterAdmin(admin.ModelAdmin):
 class WebsiteScrapeAdmin(admin.ModelAdmin):
     list_display = (
         "url",
+        "status",
+        "total_images_found",
         "scraped_at",
     )
 

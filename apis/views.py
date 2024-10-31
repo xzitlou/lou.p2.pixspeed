@@ -25,6 +25,7 @@ class WebExtractorAPIPage(View):
     def post(request, *args, **kwargs):
         settings = GlobalVars.get_globals(request)
         website_url = request.POST.get("website", "").strip().lower()
+        web_scrape = WebsiteScrape.objects.create(url=website_url)
 
         # Validar la URL
         validator = URLValidator()
@@ -32,11 +33,12 @@ class WebExtractorAPIPage(View):
             validator(website_url)
         except Exception as e:
             bugsnag.notify(Exception(f'WebExtractorAPIPage [invalid_url]: {str(e)}'))
+            web_scrape.status = WebsiteScrape.FAILED
+            web_scrape.save()
             return JsonResponse({
                 "error": settings.get("i18n").get("invalid_url")
             }, status=400)
 
-        WebsiteScrape.objects.create(url=website_url)
 
         # Determinar si la URL es una imagen
         if ".webp" in website_url or ".jpg" in website_url or ".jpeg" in website_url or ".png" in website_url:
@@ -54,6 +56,10 @@ class WebExtractorAPIPage(View):
                     "g": settings,
                 }
             )
+
+            web_scrape.status = WebsiteScrape.SUCCESS
+            web_scrape.total_images_found = len(images)
+            web_scrape.save()
 
             return JsonResponse({"html": html_content})
 
@@ -123,6 +129,10 @@ class WebExtractorAPIPage(View):
                 html_text = response.text
             except Exception as e:
                 bugsnag.notify(Exception(f'WebExtractorAPIPage [fetch_webpage]: {str(e)}'))
+
+                web_scrape.status = WebsiteScrape.FAILED
+                web_scrape.save()
+
                 return JsonResponse({
                     "error": f'{settings.get("i18n").get("failed_fetch_webpage")}'
                 }, status=500)
@@ -169,6 +179,10 @@ class WebExtractorAPIPage(View):
                         "filename": filename,
                         "url": absolute_url
                     })
+
+        web_scrape.status = WebsiteScrape.SUCCESS
+        web_scrape.total_images_found = len(images)
+        web_scrape.save()
 
         html_content = render_to_string(
             "components/images.website.html",
