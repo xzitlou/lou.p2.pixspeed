@@ -64,7 +64,7 @@ class WebExtractorAPIPage(View):
         driver = None
 
         try:
-            options = Options()
+            options = webdriver.FirefoxOptions()
             options.add_argument("--headless")
             options.add_argument("--disable-gpu")  # Mejora el rendimiento en servidores
             options.add_argument("--no-sandbox")  # Evita problemas de permisos en entornos root
