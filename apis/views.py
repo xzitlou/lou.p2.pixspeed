@@ -17,6 +17,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from app.utils import Utils
 from app.views import GlobalVars
+from commons.models.image_url_history import ImageUrlHistory
 from commons.models.website_scrape import WebsiteScrape
 from config import IMG_EXTENSIONS
 
@@ -209,4 +210,25 @@ class ImageCounterAPI(View):
         total_images += 1
         Utils.set_to_cache('total_images_optimized', total_images)
 
+        url = request.POST.get("url", "").strip()
+        ImageUrlHistory.objects.create(
+            url=url,
+            was_success=True,
+            format=request.POST.get("format", "")
+        )
+
         return JsonResponse({"total_images_optimized": total_images})
+
+
+class FailedConversionAPI(View):
+    @staticmethod
+    def post(request, *args, **kwargs):
+        url = request.POST.get("url", "").strip()
+
+        if url:
+            ImageUrlHistory.objects.create(
+                url=url,
+                format=request.POST.get("format", "")
+            )
+
+        return JsonResponse({"status": True})
