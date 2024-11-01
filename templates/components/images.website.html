@@ -1,8 +1,5 @@
 <div class="highlight p-3 border rounded-2">
     <div class="images-found">
-        <div class="total-images-found text-center">
-            <b>{{ images | length }}</b> {{ g.i18n.images_found }}
-        </div>
         <div class="found-images-list">
             {% for image in images %}
                 <div class="d-flex align-items-center" data-url="{{ image.url }}">
@@ -19,9 +16,12 @@
             {% endfor %}
         </div>
     </div>
+    <div class="total-images-found text-center my-4">
+        <b>{{ images | length }}</b> {{ g.i18n.images_found }}
+    </div>
     {% if images|length %}
         <div id="actionConvertWrapper">
-            <div class="form-check form-switch mt-4">
+            <div class="form-check form-switch">
                 <input class="form-check-input" name="format" value="" type="radio" id="originalCheck" checked>
                 <label class="form-check-label" for="originalCheck">{{ g.i18n.keep_format }}</label>
             </div>
