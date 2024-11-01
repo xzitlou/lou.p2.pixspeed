@@ -1,6 +1,8 @@
 <div class="highlight p-3 border rounded-2">
     <div class="images-found">
-        <div class="total-images-found text-center"><b>{{ images | length }}</b> {{ g.i18n.images_found }}</div>
+        <div class="total-images-found text-center">
+            <b>{{ images | length }}</b> {{ g.i18n.images_found }}
+        </div>
         <div class="found-images-list">
             {% for image in images %}
                 <div class="d-flex align-items-center" data-url="{{ image.url }}">
@@ -19,17 +21,21 @@
     </div>
     {% if images|length %}
         <div id="actionConvertWrapper">
-            <h4 class="mt-4">{{ g.i18n.convert_images }}</h4>
-            <div class="form-check form-switch">
+            <div class="form-check form-switch mt-4">
                 <input class="form-check-input" name="format" value="" type="radio" id="originalCheck" checked>
                 <label class="form-check-label" for="originalCheck">{{ g.i18n.keep_format }}</label>
             </div>
-            {% for extension in extensions %}
-                <div class="form-check form-switch">
-                    <input class="form-check-input" name="format" value="{{ extension }}" type="radio" id="{{ extension }}Check">
-                    <label class="form-check-label" for="{{ extension }}Check">{{ extension|upper }}</label>
-                </div>
-            {% endfor %}
+            <h4 class="mt-3">{{ g.i18n.convert_images }}</h4>
+            <div class="d-flex flex-wrap">
+                {% for extension in extensions %}
+                    <div style="max-width: 120px; width: 100%">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="format" value="{{ extension }}" type="radio" id="{{ extension }}Check">
+                            <label class="form-check-label" for="{{ extension }}Check">{{ extension|upper }}</label>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
             <button id="processImages" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100 mt-4">{{ g.i18n.optimize_images }}</button>
         </div>
         <div id="actionDownloadWrapper" style="display: none">
