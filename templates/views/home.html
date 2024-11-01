@@ -76,7 +76,7 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="website" class="form-label">{{ g.i18n.label_website }}</label>
-                            <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://pixspeed.com" autofocus>
+                            <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://pixspeed.com" autofocus required>
                         </div>
                         <div id="websiteHelp" class="form-text mb-3">{{ g.i18n.placeholder_website }}</div>
                         <button type="submit" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100" id="submitButton">
