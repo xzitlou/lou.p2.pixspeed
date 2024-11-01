@@ -36,6 +36,14 @@ class IndexPage(View):
     @staticmethod
     def get(request):
         settings = GlobalVars.get_globals(request)
+
+        faqs = []
+        for i in range(1, 9):
+            faqs.append({
+                "question": settings.get("i18n").get(f"faq_{i}", ""),
+                "value": settings.get("i18n").get(f"faq_content_{i}", ""),
+            })
+
         response = render(
             request,
             "views/home.html",
@@ -44,6 +52,7 @@ class IndexPage(View):
                 "title": f"{settings.get('i18n').get('home_title')} | PixSpeed.com",
                 "description": settings.get("i18n").get("home_meta_description"),
                 "g": settings,
+                "faqs": faqs,
             }
         )
 
