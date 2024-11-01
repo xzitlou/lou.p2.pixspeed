@@ -323,7 +323,7 @@
                             success: function (response) {
                                 container.find("#listImages").html(response.html);
                                 $('html, body').animate({
-                                    scrollTop: $("#listImages").offset().top + $("#listImages").outerHeight(true)
+                                    scrollTop: $("#listImages").offset().top + $("#listImages")[0].scrollHeight - 400
                                 });
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
