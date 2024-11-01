@@ -18,6 +18,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from app.utils import Utils
 from app.views import GlobalVars
 from commons.models.website_scrape import WebsiteScrape
+from config import IMG_EXTENSIONS
 
 
 class WebExtractorAPIPage(View):
@@ -41,7 +42,7 @@ class WebExtractorAPIPage(View):
 
 
         # Determinar si la URL es una imagen
-        if ".webp" in website_url or ".jpg" in website_url or ".jpeg" in website_url or ".png" in website_url:
+        if any(ext in website_url for ext in IMG_EXTENSIONS):
             img_url = website_url.split("?")[0]
             absolute_url = requests.compat.urljoin(website_url, img_url)
             filename = os.path.basename(absolute_url)
@@ -54,6 +55,7 @@ class WebExtractorAPIPage(View):
                 {
                     "images": images,
                     "g": settings,
+                    "extensions": [re.escape(ext[1:]) for ext in IMG_EXTENSIONS]
                 }
             )
 
@@ -110,7 +112,7 @@ class WebExtractorAPIPage(View):
                 absolute_url = requests.compat.urljoin(website_url, img_url)
 
                 # Filtrar extensiones deseadas
-                if any(ext in absolute_url for ext in [".webp", ".jpg", ".jpeg", ".png"]):
+                if any(ext in absolute_url for ext in IMG_EXTENSIONS):
                     filename = os.path.basename(absolute_url)
 
                     # Agregar imagen solo si no es un duplicado
@@ -150,7 +152,7 @@ class WebExtractorAPIPage(View):
                 absolute_url = requests.compat.urljoin(website_url, img_url)
 
                 # Filtrar extensiones deseadas
-                if any(ext in absolute_url for ext in [".webp", ".jpg", ".jpeg", ".png"]):
+                if any(ext in absolute_url for ext in IMG_EXTENSIONS):
                     filename = os.path.basename(absolute_url)
 
                     # Agregar imagen solo si no es un duplicado
@@ -162,7 +164,8 @@ class WebExtractorAPIPage(View):
 
             # Buscar URLs de imágenes en el HTML como texto completo
             html_content = html_text  # Obtener HTML completo
-            img_regex = r'(https?://[^\s]+?\.(?:jpg|jpeg|png|webp)|\/\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\/[^\s]+?\.(?:jpg|jpeg|png|webp)|\bimg\/[^\s]+?\.(?:jpg|jpeg|png|webp))'
+            extensions_pattern = "|".join([re.escape(ext[1:]) for ext in IMG_EXTENSIONS])
+            img_regex = rf'(https?://[^\s]+?\.({extensions_pattern})|\/\/[^\s]+?\.({extensions_pattern})|\/[^\s]+?\.({extensions_pattern})|\bimg\/[^\s]+?\.({extensions_pattern}))'
             text_img_urls = re.findall(img_regex, html_content)
 
             # Convertir URLs encontradas en el HTML como texto a absolutas
@@ -189,6 +192,7 @@ class WebExtractorAPIPage(View):
             {
                 "images": images,
                 "g": settings,
+                "extensions": [re.escape(ext[1:]) for ext in IMG_EXTENSIONS]
             }
         )
 

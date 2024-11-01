@@ -4,8 +4,6 @@ from app.utils import Utils
 from django.shortcuts import render
 from django.views.generic import View
 
-from commons.models.counter import Counter
-
 from config import SCRIPT_VERSION, API_DOMAIN, RATE_LIMIT, DEBUG
 from translations.models.language import Language
 from translations.models.translation import Translation
@@ -132,7 +130,7 @@ class FAQPage(View):
         settings = GlobalVars.get_globals(request)
 
         faqs = []
-        for i in range(1,9):
+        for i in range(1, 9):
             faqs.append({
                 "question": settings.get("i18n").get(f"faq_{i}", ""),
                 "value": settings.get("i18n").get(f"faq_content_{i}", ""),
