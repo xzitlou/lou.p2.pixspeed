@@ -96,36 +96,6 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="position-sticky" style="top: 50px">
-                    <h2 class="page-header mb-3 fw-semibold lh-1">{{ g.i18n.faq_title }}</h2>
-                    <p>{{ g.i18n.faq_meta_description }}</p>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="bsb-timeline-1 pt-5 pt-xl-8 ms-2">
-                    <ul class="timeline">
-                        {% for faq in faqs %}
-                            <li class="timeline-item">
-                                <div class="timeline-body">
-                                    <div class="timeline-content">
-                                        <div class="card border-0">
-                                            <div class="card-body p-0">
-                                                <h5 class="card-subtitle mb-1 fw-bold">{{ faq.question }}</h5>
-                                                <p class="card-text m-0">{{ faq.value }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="position-sticky" style="top: 50px">
                     <h2 class="page-header mb-3 fw-semibold lh-1">{{ g.i18n.how_it_works }}</h2>
                     <p>{{ g.i18n.how_it_works_subtitle }}</p>
                 </div>
@@ -181,6 +151,36 @@
                                 </div>
                             </div>
                         </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="position-sticky" style="top: 50px">
+                    <h2 class="page-header mb-3 fw-semibold lh-1">{{ g.i18n.faq_title }}</h2>
+                    <p>{{ g.i18n.faq_meta_description }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="bsb-timeline-1 pt-5 pt-xl-8 ms-2">
+                    <ul class="timeline">
+                        {% for faq in faqs %}
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">{{ faq.question }}</h5>
+                                                <p class="card-text m-0">{{ faq.value }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
