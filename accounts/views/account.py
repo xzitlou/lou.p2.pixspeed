@@ -26,8 +26,8 @@ class LoginPage(View):
             "views/login.html",
             {
                 "page": "login",
-                "title": f"{self.settings.get('i18n').get('login_title')} - TLDRai.com",
-                "description": self.settings.get("i18n").get("login_meta"),
+                "title": f"{self.settings.get('i18n').get('login_title')} - PixSpeed.com",
+                "description": self.settings.get("i18n").get("login_meta_description"),
                 "g": self.settings,
                 "data": request.GET,
                 "errors": self.errors,
@@ -38,7 +38,8 @@ class LoginPage(View):
 
     def post(self, request):
         account, errors = CustomUser.login_user(
-            data=request.POST,
+            email=request.POST.get("email"),
+            password=request.POST.get("password"),
             i18n=self.settings.get("i18n")
         )
 
@@ -50,8 +51,6 @@ class LoginPage(View):
 
         if request.POST.get("next"):
             return redirect(request.POST.get("next"))
-        if not account.plan_subscribed and not account.is_plan_active:
-            return redirect("pro")
 
         return redirect("account")
 
@@ -59,6 +58,7 @@ class LoginPage(View):
 class SignupPage(View):
     errors = None
     settings = None
+    data = None
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -73,10 +73,11 @@ class SignupPage(View):
             "views/register.html",
             {
                 "page": "register",
-                "title": f"{self.settings.get('i18n').get('signup_title')} - TLDRai.com",
-                "description": self.settings.get("i18n").get("signup_meta"),
+                "title": f"{self.settings.get('i18n').get('register')} - PixSpeed.com",
+                "description": self.settings.get("i18n").get("signup_meta_description"),
                 "g": self.settings,
                 "errors": self.errors,
+                "data": self.data or request.GET
             }
         )
 
@@ -85,27 +86,27 @@ class SignupPage(View):
     def post(self, request):
         data = request.POST
         account, errors = CustomUser.register_user(
-            email=data.get("signupEmail"),
-            password=data.get("signupPassword"),
+            email=data.get("email"),
+            password=data.get("password"),
             i18n=self.settings.get("i18n"),
             lang=self.settings.get("lang").iso,
         )
 
         if errors:
             self.errors = errors
+            self.data = data
             return self.get(request)
 
         login(request, account)
         Utils.send_email(
             recipients=[account.email],
-            subject=self.settings.get("i18n").get("subject_verification"),
+            subject=f'self.settings.get("i18n").get("subject_verification"): {account.verification_code}',
             template="email-verification",
             data={
                 "user": account,
                 "g": self.settings
             }
         )
-
         return redirect("verification")
 
 
@@ -126,7 +127,7 @@ class LostPasswordPage(View):
             "views/lost-password.html",
             {
                 "page": "lost_password",
-                "title": f"{self.settings.get('i18n').get('password_lost_title')} - TLDRai.com",
+                "title": f"{self.settings.get('i18n').get('password_lost_title')} - PixSpeed.com",
                 "description": self.settings.get("i18n").get("lost_password_meta"),
                 "g": self.settings,
                 "errors": self.errors,
@@ -179,7 +180,7 @@ class RestorePasswordPage(View):
             "views/restore-password.html",
             {
                 "page": "reset_password",
-                "title": f"{self.settings.get('i18n').get('restore_title')} - TLDRai.com",
+                "title": f"{self.settings.get('i18n').get('restore_title')} - PixSpeed.com",
                 "description": self.settings.get("i18n").get("restore_meta"),
                 "g": self.settings,
                 "data": data,
@@ -221,7 +222,7 @@ class VerificationPage(LoginRequiredMixin, View):
             request,
             "views/verification.html",
             {
-                "title": f"{self.settings.get('i18n').get('verification_title')} - TLDRai.com",
+                "title": f"{self.settings.get('i18n').get('verification_title')} - PixSpeed.com",
                 "description": "",
                 "g": self.settings,
                 "errors": self.errors,
@@ -262,7 +263,7 @@ class AccountPage(LoginRequiredMixin, View):
             "views/account.html",
             {
                 "page": "account",
-                "title": f"{settings.get('i18n').get('account_title')} - TLDRai.com",
+                "title": f"{settings.get('i18n').get('account_title')} - PixSpeed.com",
                 "description": "",
                 "g": settings,
                 "reasons": [item for k, item in settings.get("i18n").items() if "cancellation_reason_" in k]
@@ -286,7 +287,7 @@ class AccountSecurityPage(LoginRequiredMixin, View):
             "views/account.security.html",
             {
                 "page": "account",
-                "title": f"Security - TLDRai.com",
+                "title": f"Security - PixSpeed.com",
                 "description": "",
                 "g": self.settings,
                 "errors": self.errors,
@@ -324,7 +325,7 @@ class AccountCancelSubscriptionPage(LoginRequiredMixin, View):
             "views/account.cancel-subscription.html",
             {
                 "page": "account",
-                "title": f"Cancel subscription - TLDRai.com",
+                "title": f"Cancel subscription - PixSpeed.com",
                 "description": "",
                 "g": self.settings,
                 "errors": self.errors,
@@ -359,7 +360,7 @@ class AccountConversionsPage(LoginRequiredMixin, View):
             "views/account.conversions.html",
             {
                 "page": "account",
-                "title": f"Conversions - TLDRai.com",
+                "title": f"Conversions - PixSpeed.com",
                 "description": "",
                 "g": settings,
             }
@@ -377,7 +378,7 @@ class AccountBillingPage(LoginRequiredMixin, View):
             "views/account.billing.html",
             {
                 "page": "account",
-                "title": f"Billing - TLDRai.com",
+                "title": f"Billing - PixSpeed.com",
                 "description": "",
                 "g": settings,
                 "payments": request.user.get_payments(page=request.GET.get("page")),

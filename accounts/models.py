@@ -155,9 +155,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return user, None
 
     @staticmethod
-    def login_user(data, i18n: dict):
-        email = data.get("loginEmail")
-        password = data.get("loginPassword")
+    def login_user(email: str, password: str, i18n: dict):
         errors = []
 
         if not email:
@@ -169,9 +167,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             return None, errors
 
         try:
-            email = email.lower()
+            email = email.lower().strip()
             validate_email(email)
-            user = CustomUser.objects.get(email=email)
+            user = CustomUser.objects.get(email__iexact=email)
         except Exception as e:
             print(str(e))
             return None, [i18n.get("wrong_credentials", "wrong_credentials")]

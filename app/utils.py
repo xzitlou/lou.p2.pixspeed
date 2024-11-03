@@ -38,7 +38,7 @@ class Utils:
 
     @staticmethod
     def generate_verification_code():
-        return "".join(["%s" % randint(0, 9) for p in range(0, 6)])
+        return "".join(["%s" % randint(0, 9) for _ in range(0, 6)])
 
     @staticmethod
     def send_email(
@@ -59,7 +59,7 @@ class Utils:
                 "to": recipients,
                 "subject": subject,
                 "html": html_content
-            }).text
+            })
 
     @staticmethod
     def get_language(request):

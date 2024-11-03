@@ -78,6 +78,12 @@
                         <a class="nav-link" href="{% url "faq" %}?lang={{ g.lang.iso }}">FAQ</a>
                     </li>
                 </ul>
+                {% if user.is_authenticated %}
+                    <a href="{% url "account" %}" class="m-0 ms-sm-2 btn btn-primary">Account</a>
+                {% else %}
+                    <a href="{% url "login" %}?lang={{ g.lang.iso }}" class="m-0 ms-sm-4 btn btn-outline-primary">{{ g.i18n.login_title }}</a>
+                    <a href="{% url "signup" %}?lang={{ g.lang.iso }}" class="m-0 ms-sm-2 btn btn-primary">{{ g.i18n.register }}</a>
+                {% endif %}
             </div>
         </div>
     </nav>
