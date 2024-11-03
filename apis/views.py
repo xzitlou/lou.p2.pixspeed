@@ -288,7 +288,8 @@ class RestoreCreditAPI(View):
             if data.get("url"):
                 ImageUrlHistory.objects.create(
                     url=data.get("url"),
-                    format=data.get("format", None)
+                    format=data.get("format", None),
+                    from_api=True
                 )
 
             return JsonResponse({"status": True, "remaining_credits": user.image_credits})
@@ -316,7 +317,8 @@ class SuccessOptimizationAPI(View):
         ImageUrlHistory.objects.create(
             url=data.get("url", "").strip(),
             was_success=True,
-            format=data.get("format", "")
+            format=data.get("format", ""),
+            from_api=True
         )
 
         return JsonResponse({"total_images_optimized": total_images})
