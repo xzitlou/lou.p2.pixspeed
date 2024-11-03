@@ -19,7 +19,7 @@ from app.utils import Utils
 from app.views import GlobalVars
 from commons.models.image_url_history import ImageUrlHistory
 from commons.models.website_scrape import WebsiteScrape
-from config import IMG_EXTENSIONS
+from config import IMG_EXTENSIONS, API_DOMAIN, MAIN_KEY
 
 
 class WebExtractorAPIPage(View):
@@ -200,35 +200,42 @@ class WebExtractorAPIPage(View):
         return JsonResponse({"html": html_content})
 
 
-class ImageCounterAPI(View):
+class OptimizerAPIPage(View):
     @staticmethod
     def post(request, *args, **kwargs):
-        # Obtener el contador actual o iniciar en 0 si no existe
-        total_images = Utils.get_from_cache('total_images_optimized')
+        api_url = f"{API_DOMAIN}/url"  # API de Go
+        image_url = request.POST.get("url", "")
+        format_requested = request.POST.get("format", "")
+        response = requests.post(api_url, headers={
+            "key": MAIN_KEY
+        }, data={
+            "url": image_url,
+            "format": format_requested
+        })
 
-        # Incrementar el contador
+        if response.status_code != 200:
+            print(response.json())
+            ImageUrlHistory.objects.create(
+                url=image_url,
+                format=format_requested
+            )
+            return JsonResponse({"failed": True}, status=400)
+
+        total_images = Utils.get_from_cache('total_images_optimized')
         total_images += 1
         Utils.set_to_cache('total_images_optimized', total_images)
 
-        url = request.POST.get("url", "").strip()
         ImageUrlHistory.objects.create(
-            url=url,
+            url=image_url,
             was_success=True,
-            format=request.POST.get("format", "")
+            format=format_requested
         )
 
-        return JsonResponse({"total_images_optimized": total_images})
+        html_content = render_to_string(
+            "components/image.optimization_summary.html",
+            context={
+                **response.json(),
+            }
+        )
 
-
-class FailedConversionAPI(View):
-    @staticmethod
-    def post(request, *args, **kwargs):
-        url = request.POST.get("url", "").strip()
-
-        if url:
-            ImageUrlHistory.objects.create(
-                url=url,
-                format=request.POST.get("format", "")
-            )
-
-        return JsonResponse({"status": True})
+        return JsonResponse({"html": html_content})

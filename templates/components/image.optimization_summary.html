@@ -1,0 +1,8 @@
+<div class="text-center">
+    <div class="original-size">{{ original_size }}kb</div>
+</div>
+<div class="text-center">
+    <div class="fw-bold {% if decreased %}text-success{% else %}text-danger{% endif %}">{{ size_reduction }}%</div>
+    <div class="small">{{ optimized_size }}kb</div>
+</div>
+<a class="btn btn-sm btn-success ms-2" href="{{ url }}" data-uuid="{{ uuid }}">{% include "svgs/download.svg" %}</a>

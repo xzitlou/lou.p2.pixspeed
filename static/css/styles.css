@@ -1,7 +1,6 @@
 body {
     font-size: 16px;
     color: #000;
-    font-family: Gabarito, sans-serif;
 }
 
 #footer {
@@ -274,6 +273,17 @@ body {
 
 .spinner-border {
     margin-right: 10px;
+}
+
+.original-size {
+    font-weight: 300;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.btn-success svg {
+    height: 35px;
+    width: 35px;
 }
 
 @media (max-width: 480px) {
