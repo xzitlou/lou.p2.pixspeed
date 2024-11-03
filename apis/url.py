@@ -1,8 +1,10 @@
 from django.urls import path
 
-from apis.views import WebExtractorAPIPage, OptimizerAPIPage
+from apis.views import WebExtractorAPI, OptimizerAPI, TokenVerificationAPI, RestoreCreditAPI
 
 urlpatterns = [
-    path("web/", WebExtractorAPIPage.as_view(), name="web-extractor"),
-    path("optimizer/", OptimizerAPIPage.as_view(), name="url-optimizer"),
+    path("web/", WebExtractorAPI.as_view(), name="web-extractor"),
+    path("optimizer/", OptimizerAPI.as_view(), name="url-optimizer"),
+    path("token-verification/", TokenVerificationAPI.as_view()),
+    path("restore-credit/", RestoreCreditAPI.as_view()),
 ]

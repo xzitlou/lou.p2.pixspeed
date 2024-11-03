@@ -251,10 +251,10 @@
                     function onProcessImages() {
                         container.find("#actionConvertWrapper").hide();
                         $('html, body').animate({
-                            scrollTop: $("#listImages").offset().top
+                            scrollTop: container.find("#listImages").offset().top
                         });
 
-                        var images = $(".images-found div[data-url]");
+                        var images = container.find(".images-found div[data-url]");
                         processImagesSequentially(images);
                     }
 
@@ -313,7 +313,7 @@
                             success: function (response) {
                                 container.find("#listImages").html(response.html);
                                 $('html, body').animate({
-                                    scrollTop: $("#listImages").offset().top + $("#listImages")[0].scrollHeight - 400
+                                    scrollTop: container.find("#listImages").offset().top + container.find("#listImages")[0].scrollHeight - 400
                                 });
                             },
                             error: function (jqXHR, textStatus, errorThrown) {

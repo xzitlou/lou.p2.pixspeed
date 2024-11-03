@@ -38,9 +38,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_confirm = models.BooleanField(default=False)
-    in_newsletter = models.BooleanField(default=False)
     uuid = models.CharField(max_length=250, default=Utils.generate_uuid, null=False, blank=False)
-    confirmation_token = models.CharField(default=Utils.generate_hex_uuid, max_length=250, null=True, blank=False)
     verification_code = models.CharField(default=Utils.generate_verification_code, max_length=10, null=True, blank=True)
     verification_code_sent_at = models.DateTimeField(default=timezone.now)
     restore_password_token = models.CharField(max_length=250, null=True, blank=False)
@@ -49,12 +47,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     updated_at = models.DateField(auto_now_add=True, null=True)
     created_at = models.DateField(default=timezone.now)
     api_token = models.CharField(default=Utils.generate_hex_uuid, max_length=250, null=True, blank=True)
-    card_nonce = models.CharField(max_length=250, null=True, blank=True)
-    payment_nonce = models.CharField(max_length=250, null=True, blank=True, unique=True)
-    processor = models.CharField(max_length=50, null=True, blank=True)
-    next_billing_date = models.DateTimeField(null=True, blank=True)
     plan_subscribed = models.CharField(max_length=50, null=True, blank=True)
     is_plan_active = models.BooleanField(default=False)
+    image_credits = models.IntegerField(default=0)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["is_staff"]

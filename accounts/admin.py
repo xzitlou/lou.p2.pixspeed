@@ -11,7 +11,6 @@ class CustomUserAdmin(admin.ModelAdmin):
         "is_confirm",
         "is_plan_active",
         "plan_subscribed",
-        "next_billing_date",
         "lang",
         "created_at",
     )

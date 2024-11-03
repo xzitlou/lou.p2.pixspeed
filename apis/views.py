@@ -4,6 +4,9 @@ import re
 import bugsnag
 import requests
 from bs4 import BeautifulSoup
+from django.db import transaction
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,6 +18,7 @@ from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 
+from accounts.models import CustomUser
 from app.utils import Utils
 from app.views import GlobalVars
 from commons.models.image_url_history import ImageUrlHistory
@@ -22,7 +26,7 @@ from commons.models.website_scrape import WebsiteScrape
 from config import IMG_EXTENSIONS, API_DOMAIN, MAIN_KEY
 
 
-class WebExtractorAPIPage(View):
+class WebExtractorAPI(View):
     @staticmethod
     def post(request, *args, **kwargs):
         settings = GlobalVars.get_globals(request)
@@ -40,7 +44,6 @@ class WebExtractorAPIPage(View):
             return JsonResponse({
                 "error": settings.get("i18n").get("invalid_url")
             }, status=400)
-
 
         # Determinar si la URL es una imagen
         if any(ext in website_url for ext in IMG_EXTENSIONS):
@@ -200,7 +203,7 @@ class WebExtractorAPIPage(View):
         return JsonResponse({"html": html_content})
 
 
-class OptimizerAPIPage(View):
+class OptimizerAPI(View):
     @staticmethod
     def post(request, *args, **kwargs):
         api_url = f"{API_DOMAIN}/url"  # API de Go
@@ -239,3 +242,43 @@ class OptimizerAPIPage(View):
         )
 
         return JsonResponse({"html": html_content})
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class TokenVerificationAPI(View):
+    @staticmethod
+    @transaction.atomic
+    def post(request, *args, **kwargs):
+        try:
+            user = CustomUser.objects.select_for_update().get(
+                api_token=request.headers.get("key", None)
+            )
+
+            if user.image_credits <= 0:
+                return JsonResponse({"error": "You need more credits"}, status=400)
+
+            user.image_credits -= 1
+            user.save()
+            return JsonResponse({"status": True, "remaining_credits": user.image_credits})
+
+        except Exception as e:
+            print(str(e))
+            return JsonResponse({"error": "Invalid API Key"}, status=400)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class RestoreCreditAPI(View):
+    @staticmethod
+    @transaction.atomic
+    def post(request, *args, **kwargs):
+        try:
+            user = CustomUser.objects.select_for_update().get(
+                api_token=request.headers.get("key", None)
+            )
+
+            user.image_credits += 1
+            user.save()
+            return JsonResponse({"status": True, "remaining_credits": user.image_credits})
+
+        except CustomUser.DoesNotExist:
+            return JsonResponse({"error": "Invalid API Key"}, status=400)

@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 
 from accounts.views.account import *
 
@@ -8,5 +8,4 @@ urlpatterns = [
     path("security/", AccountSecurityPage.as_view(), name="account-security"),
     path("conversions/", AccountConversionsPage.as_view(), name="account-conversions"),
     path("billing/", AccountBillingPage.as_view(), name="account-billing"),
-    path("api/", include("accounts.urls.api")),
 ]
