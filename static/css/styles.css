@@ -281,6 +281,7 @@ body {
     margin-right: 10px;
 }
 
+.remove-item svg,
 .btn-success svg {
     height: 35px;
     width: 35px;

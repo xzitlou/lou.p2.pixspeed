@@ -6,9 +6,9 @@
                     <div class="icon flex-shrink-0">
                         <img src="{{ image.url }}">
                     </div>
-                    <div class="name fw-bold ms-2 flex-grow-1 me-2">{{ image.filename }}</div>
+                    <div class="name fw-bold ms-2 flex-grow-1 me-3">{{ image.filename }}</div>
                     <div class="result ms-auto d-flex align-items-center flex-shrink-0">
-                        <button class="btn btn-outline-danger btn-sm remove-item">{{ g.i18n.remove }}</button>
+                        <button class="btn btn-danger btn-sm remove-item">{% include "svgs/remove.svg" %}</button>
                     </div>
                 </div>
             {% empty %}
