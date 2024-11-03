@@ -1,3 +1,4 @@
+import json
 import os
 import re
 
@@ -217,7 +218,6 @@ class OptimizerAPI(View):
         })
 
         if response.status_code != 200:
-            print(response.json())
             ImageUrlHistory.objects.create(
                 url=image_url,
                 format=format_requested
@@ -272,13 +272,51 @@ class RestoreCreditAPI(View):
     @transaction.atomic
     def post(request, *args, **kwargs):
         try:
+            data = json.loads(request.body)
+        except Exception as e:
+            print(str(e))
+            data = {}
+
+        try:
             user = CustomUser.objects.select_for_update().get(
                 api_token=request.headers.get("key", None)
             )
 
             user.image_credits += 1
             user.save()
-            return JsonResponse({"status": True, "remaining_credits": user.image_credits})
 
+            if data.get("url"):
+                ImageUrlHistory.objects.create(
+                    url=data.get("url"),
+                    format=data.get("format", None)
+                )
+
+            return JsonResponse({"status": True, "remaining_credits": user.image_credits})
         except CustomUser.DoesNotExist:
             return JsonResponse({"error": "Invalid API Key"}, status=400)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class SuccessOptimizationAPI(View):
+    @staticmethod
+    def post(request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+        except Exception as e:
+            print(str(e))
+            data = {}
+
+        # Obtener el contador actual o iniciar en 0 si no existe
+        total_images = Utils.get_from_cache('total_images_optimized')
+
+        # Incrementar el contador
+        total_images += 1
+        Utils.set_to_cache('total_images_optimized', total_images)
+
+        ImageUrlHistory.objects.create(
+            url=data.get("url", "").strip(),
+            was_success=True,
+            format=data.get("format", "")
+        )
+
+        return JsonResponse({"total_images_optimized": total_images})
