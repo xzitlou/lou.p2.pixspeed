@@ -46,7 +46,7 @@ class LoginPage(View):
             self.errors = errors
             return self.get(request)
 
-        resp = Utils.send_email(
+        Utils.send_email(
             recipients=[account.email],
             subject=self.settings.get("i18n").get("subject_verification"),
             template="login.html",
@@ -55,7 +55,6 @@ class LoginPage(View):
                 "g": self.settings
             }
         )
-        print(resp)
         return redirect(reverse("login") + "?success=1")
 
 

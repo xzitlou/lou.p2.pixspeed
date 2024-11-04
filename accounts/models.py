@@ -41,7 +41,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_confirm = models.BooleanField(default=False)
     uuid = models.CharField(max_length=250, default=Utils.generate_uuid, null=False, blank=False)
     verification_code = models.CharField(default=Utils.generate_hex_uuid, max_length=10, null=True, blank=True)
-    verification_code_sent_at = models.DateTimeField(default=timezone.now)
     restore_password_token = models.CharField(max_length=250, null=True, blank=False)
     lost_password_email_sent_at = models.DateTimeField(null=True, blank=True)
     lang = models.CharField(max_length=5, default="en")
@@ -165,6 +164,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             print(str(e))
             return None, [i18n.get("wrong_credentials", "wrong_credentials")]
 
+        user.verification_code = Utils.generate_hex_uuid()
+        user.save()
         return user, None
 
     @staticmethod
