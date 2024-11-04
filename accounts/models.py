@@ -34,12 +34,13 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    full_name = models.CharField(max_length=255, null=True, blank=False)
     email = models.EmailField(max_length=250, unique=True, null=False, blank=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_confirm = models.BooleanField(default=False)
     uuid = models.CharField(max_length=250, default=Utils.generate_uuid, null=False, blank=False)
-    verification_code = models.CharField(default=Utils.generate_verification_code, max_length=10, null=True, blank=True)
+    verification_code = models.CharField(default=Utils.generate_hex_uuid, max_length=10, null=True, blank=True)
     verification_code_sent_at = models.DateTimeField(default=timezone.now)
     restore_password_token = models.CharField(max_length=250, null=True, blank=False)
     lost_password_email_sent_at = models.DateTimeField(null=True, blank=True)
@@ -155,17 +156,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return user, None
 
     @staticmethod
-    def login_user(email: str, password: str, i18n: dict):
-        errors = []
-
-        if not email:
-            errors.append(i18n.get("missing_email", "missing_email"))
-        if not password:
-            errors.append(i18n.get("missing_password", "missing_password"))
-
-        if len(errors):
-            return None, errors
-
+    def login_user(email: str, i18n: dict):
         try:
             email = email.lower().strip()
             validate_email(email)
@@ -174,27 +165,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             print(str(e))
             return None, [i18n.get("wrong_credentials", "wrong_credentials")]
 
-        if not user.check_password(password):
-            return None, [i18n.get("wrong_credentials", "wrong_credentials")]
-
         return user, None
 
     @staticmethod
-    def register_user(email: str, password: str, i18n: dict, lang: str):
-        errors = []
-
-        if not email:
-            errors.append(i18n.get("missing_email", "missing_email"))
-        if not password:
-            errors.append(i18n.get("missing_password", "missing_password"))
-        elif len(password) < 4:
-            errors.append(i18n.get("weak_password", "weak_password"))
-
-        if len(errors):
-            return None, errors
-
+    def register_user(full_name: str, email: str, i18n: dict, lang: str):
+        if not full_name:
+            return None, [i18n.get("missing_full_name", "missing_full_name")]
         try:
-            email = email.lower()
+            email = email.lower().strip()
             validate_email(email)
         except Exception as e:
             print(str(e))
@@ -204,10 +182,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             return None, [i18n.get("email_taken", "email_taken")]
 
         user = CustomUser.objects.create(
+            full_name=full_name.title(),
             email=email,
             lang=lang
         )
-        user.set_password(password)
+        user.set_password(Utils.generate_hex_uuid())
         user.save()
 
         return user, None

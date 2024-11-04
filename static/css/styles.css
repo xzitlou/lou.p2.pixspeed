@@ -243,7 +243,7 @@ body {
     border-radius: 50%;
     content: "";
     height: var(--bsb-tl-circle-size);
-    left: calc(var(--bsb-tl-circle-offset)* -1);
+    left: calc(var(--bsb-tl-circle-offset) * -1);
     position: absolute;
     top: 0;
     width: var(--bsb-tl-circle-size);
@@ -293,6 +293,13 @@ body {
 
 .pixspeed-col {
     max-width: 520px;
+}
+
+#accountButton {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 120px;
 }
 
 @media (max-width: 480px) {

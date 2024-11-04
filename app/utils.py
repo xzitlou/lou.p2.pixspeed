@@ -48,18 +48,18 @@ class Utils:
             template=None,
             data=None
     ):
-        template = get_template(f"mailing/{template}.html")
+        template = get_template(f"mailing/{template}")
         html_content = template.render(data)
 
         return requests.post(
             f"https://api.mailgun.net/v3/{MAILGUN_KEYS.get('domain')}/messages",
-            auth=("api", MAILGUN_KEYS.get("pk")),
+            auth=("api", MAILGUN_KEYS.get("key")),
             data={
                 "from": sender,
                 "to": recipients,
                 "subject": subject,
                 "html": html_content
-            })
+            }).text
 
     @staticmethod
     def get_language(request):

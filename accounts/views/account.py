@@ -39,7 +39,6 @@ class LoginPage(View):
     def post(self, request):
         account, errors = CustomUser.login_user(
             email=request.POST.get("email"),
-            password=request.POST.get("password"),
             i18n=self.settings.get("i18n")
         )
 
@@ -47,12 +46,17 @@ class LoginPage(View):
             self.errors = errors
             return self.get(request)
 
-        login(request, account)
-
-        if request.POST.get("next"):
-            return redirect(request.POST.get("next"))
-
-        return redirect("account")
+        resp = Utils.send_email(
+            recipients=[account.email],
+            subject=self.settings.get("i18n").get("subject_verification"),
+            template="login.html",
+            data={
+                "user": account,
+                "g": self.settings
+            }
+        )
+        print(resp)
+        return redirect(reverse("login") + "?success=1")
 
 
 class SignupPage(View):
@@ -86,8 +90,8 @@ class SignupPage(View):
     def post(self, request):
         data = request.POST
         account, errors = CustomUser.register_user(
+            full_name=data.get("full_name"),
             email=data.get("email"),
-            password=data.get("password"),
             i18n=self.settings.get("i18n"),
             lang=self.settings.get("lang").iso,
         )
@@ -97,151 +101,16 @@ class SignupPage(View):
             self.data = data
             return self.get(request)
 
-        login(request, account)
         Utils.send_email(
             recipients=[account.email],
-            subject=f'self.settings.get("i18n").get("subject_verification"): {account.verification_code}',
-            template="email-verification",
+            subject=self.settings.get("i18n").get("subject_verification"),
+            template="login.html",
             data={
                 "user": account,
                 "g": self.settings
             }
         )
-        return redirect("verification")
-
-
-class LostPasswordPage(View):
-    errors = None
-    settings = None
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect("account")
-
-        self.settings = GlobalVars.get_globals(request)
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request):
-        response = render(
-            request,
-            "views/lost-password.html",
-            {
-                "page": "lost_password",
-                "title": f"{self.settings.get('i18n').get('password_lost_title')} - PixSpeed.com",
-                "description": self.settings.get("i18n").get("lost_password_meta"),
-                "g": self.settings,
-                "errors": self.errors,
-                "data": request.GET,
-            }
-        )
-
-        return response
-
-    def post(self, request):
-        from accounts.models import CustomUser
-        data = request.POST
-        account, errors = CustomUser.lost_password(
-            data=data,
-            i18n=self.settings.get("i18n")
-        )
-
-        if errors:
-            self.errors = errors
-            return self.get(request)
-
-        Utils.send_email(
-            recipients=[account.email],
-            subject=self.settings.get("i18n").get("subject_restore"),
-            template="restore-password",
-            data={
-                "user": account,
-                "g": self.settings
-            }
-        )
-
-        return redirect(reverse("lost-password") + "?status=1")
-
-
-class RestorePasswordPage(View):
-    settings = None
-    errors = None
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect("account")
-
-        self.settings = GlobalVars.get_globals(request)
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request):
-        data = request.GET
-        response = render(
-            request,
-            "views/restore-password.html",
-            {
-                "page": "reset_password",
-                "title": f"{self.settings.get('i18n').get('restore_title')} - PixSpeed.com",
-                "description": self.settings.get("i18n").get("restore_meta"),
-                "g": self.settings,
-                "data": data,
-                "errors": self.errors
-            }
-        )
-
-        return response
-
-    def post(self, request):
-        from accounts.models import CustomUser
-        data = request.POST
-        account, errors = CustomUser.restore_password(
-            data=data,
-            i18n=self.settings.get("i18n")
-        )
-
-        if errors:
-            self.errors = errors
-            return self.get(request)
-
-        return redirect(reverse("restore-password") + "?status=1")
-
-
-class VerificationPage(LoginRequiredMixin, View):
-    login_url = "login"
-    errors = None
-    settings = None
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.is_confirm:
-            return redirect("account")
-
-        self.settings = GlobalVars.get_globals(request)
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request):
-        response = render(
-            request,
-            "views/verification.html",
-            {
-                "title": f"{self.settings.get('i18n').get('verification_title')} - PixSpeed.com",
-                "description": "",
-                "g": self.settings,
-                "errors": self.errors,
-            }
-        )
-
-        return response
-
-    def post(self, request):
-        account, errors = request.user.verify_code(
-            data=request.POST,
-            i18n=self.settings.get("i18n")
-        )
-
-        if errors:
-            self.errors = errors
-            return self.get(request)
-
-        return redirect("pro")
+        return redirect(reverse("signup") + "?success=1")
 
 
 class LogoutPage(LoginRequiredMixin, View):
@@ -250,6 +119,23 @@ class LogoutPage(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         logout(request)
+        return redirect("index")
+
+
+class MagicAccessPage(View):
+    @staticmethod
+    def get(request, *args, **kwargs):
+        try:
+            account = CustomUser.objects.get(
+                verification_code=request.GET.get("token")
+            )
+        except Exception as e:
+            print(str(e))
+            return redirect("login")
+
+        account.is_confirm = True
+        account.save()
+        login(request, account)
         return redirect("index")
 
 
