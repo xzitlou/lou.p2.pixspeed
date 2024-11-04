@@ -6,6 +6,7 @@ import bugsnag
 import requests
 from bs4 import BeautifulSoup
 from django.db import transaction
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from selenium.webdriver.chrome.options import Options
@@ -25,6 +26,23 @@ from app.views import GlobalVars
 from commons.models.image_url_history import ImageUrlHistory
 from commons.models.website_scrape import WebsiteScrape
 from config import IMG_EXTENSIONS, API_DOMAIN, MAIN_KEY
+
+
+class APIDocumentationPage(View):
+    @staticmethod
+    def get(request, *args, **kwargs):
+        settings = GlobalVars.get_globals(request)
+        response = render(
+            request,
+            "views/documentation.html",
+            {
+                "title": f"API | PixSpeed.com",
+                "description": settings.get('i18n').get('thanks_meta'),
+                "g": settings,
+            }
+        )
+
+        return response
 
 
 class WebExtractorAPI(View):

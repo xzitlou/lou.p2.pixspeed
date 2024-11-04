@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-2 form-text">Check our API documentation. <a href="">API Guide</a></div>
+            <div class="mt-2 form-text">Check our API documentation. <a href="{% url "api-documentation-page" %}">API Guide</a></div>
         </div>
         <div class="bg-light-gray p-4 rounded-4 mt-4">
             <h4 class="fw-bold text-danger">Delete account</h4>
@@ -38,18 +38,20 @@
         </div>
     </div>
     <div class="modal fade" id="regenerateKeyModal" tabindex="-1" aria-labelledby="regenerateKeyModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Regenerate API key</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Regenerating your API token will immediately disable the current token, which may cause any applications or integrations using it to stop working until they are updated with the new token. Make sure you update all your apps to use the new token after regeneration.
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary w-100 rounded-pill">Continue</button>
-                <button type="button" class="btn w-100 btn-light rounded-pill" data-bs-dismiss="modal">Cancel</button>
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Regenerate API key</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Regenerating your API token will immediately disable the current token, which may cause any applications or integrations using it to stop working until they are updated with the new token. Make sure you update all your apps to use the new token after
+                    regeneration.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary w-100 rounded-pill">Continue</button>
+                    <button type="button" class="btn w-100 btn-light rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
