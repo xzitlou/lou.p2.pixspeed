@@ -6,4 +6,5 @@ urlpatterns = [
     path("", AccountPage.as_view(), name="account"),
     path("billing/", AccountBillingPage.as_view(), name="account-billing"),
     path('delete-account/', AccountDeletePage.as_view(), name='delete-account'),
+    path('regenerate-token/', RegenerateTokenPage.as_view(), name='regenerate-token'),
 ]

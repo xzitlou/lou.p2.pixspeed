@@ -209,3 +209,14 @@ class AccountDeletePage(LoginRequiredMixin, View):
         request.user.delete()
 
         return redirect("index")
+
+
+class RegenerateTokenPage(LoginRequiredMixin, View):
+    login_url = "login"
+
+    @staticmethod
+    def post(request, *args, **kwargs):
+        request.user.api_token = Utils.generate_hex_uuid()
+        request.user.save()
+
+        return redirect("account")
