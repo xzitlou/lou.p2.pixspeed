@@ -37,7 +37,7 @@ class APIDocumentationPage(View):
             "views/documentation.html",
             {
                 "title": f"API | PixSpeed.com",
-                "description": settings.get('i18n').get('thanks_meta'),
+                "description": "Explore the PixSpeed API documentation to learn how to seamlessly integrate image optimization and conversion into your applications..",
                 "g": settings,
             }
         )
