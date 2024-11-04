@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container my-3">
+        <div class="p-3">
+            <h1 class="page-header fw-bold text-truncate mb-0">Account</h1>
+            <div>{{ user.email }}</div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row align-items-start">
+            <a href="{% url 'account-billing' %}" class="btn text-primary">Payments</a>
+        </div>
+        <div class="bg-light-gray p-4 rounded-4 mt-4">
+            <h4 class="fw-bold">API</h4>
+            <div class="d-flex flex-sm-row flex-column align-items-start gap-4 bg-white rounded-3 p-3">
+                <div class="flex-grow-1">
+                    <div class="form-text m-0">Key</div>
+                    <div class="position-relative">
+                        <div id="{{ user.api_token }}" class="fw-bold copy-api-token pointer">{{ user.api_token }}</div>
+                        <div id="copy-confirmation" class="text-primary small">Copied to clipboard</div>
+                    </div>
+                </div>
+                <div class="d-flex gap-4 align-items-end">
+                    <div>
+                        <div class="form-text m-0">Compressions</div>
+                        <div>{{ user.api_compressions }}</div>
+                    </div>
+                    <div class="ms-auto ms-sm-4">
+                        <div>
+                            <button class="btn btn-warning rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#regenerateKeyModal">Regenerate key</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2 form-text">Revisa la documentación de nuestro API. <a href="">API Guide</a></div>
+        </div>
+        <div class="bg-light-gray p-4 rounded-4 mt-4">
+            <h4 class="fw-bold text-danger">Delete account</h4>
+            <p class="fw-bold">Be careful! This process has no return</p>
+            <p>All the information related to your account will be permanently delete. This includes information about your payments and notifications. You will lose any PRO benefits as well and your subscription if you have one will be cancelled</p>
+            <a href="" class="btn btn-outline-danger rounded-pill">I'm sure, continue deleting my account</a>
+        </div>
+    </div>
+    <div class="modal fade" id="regenerateKeyModal" tabindex="-1" aria-labelledby="regenerateKeyModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Regenerate API key</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Regenerating your API token will immediately disable the current token, which may cause any applications or integrations using it to stop working until they are updated with the new token. Make sure you update all your apps to use the new token after regeneration.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary w-100 rounded-pill">Continue</button>
+                <button type="button" class="btn w-100 btn-light rounded-pill" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        (function () {
+            "use strict";
+            $(document).ready(
+                function () {
+                    var container = $(".page-container");
+
+                    container.on("click", ".copy-api-token", onCopyAPIKey);
+
+                    function onCopyAPIKey() {
+                        var token = $(this).text();
+
+                        navigator.clipboard.writeText(token).then(function () {
+                            $("#copy-confirmation").fadeIn().delay(1000).fadeOut();
+                        }).catch(function (error) {
+                            console.error("Error copying text: ", error);
+                        });
+                    }
+                }
+            );
+        }());
+    </script>
+{% endblock %}

@@ -258,6 +258,7 @@ class TokenVerificationAPI(View):
                 return JsonResponse({"error": "You need more credits"}, status=400)
 
             user.image_credits -= 1
+            user.api_compressions += 1
             user.save()
             return JsonResponse({"status": True, "remaining_credits": user.image_credits})
 
@@ -283,6 +284,7 @@ class RestoreCreditAPI(View):
             )
 
             user.image_credits += 1
+            user.api_compressions -= 1
             user.save()
 
             if data.get("url"):

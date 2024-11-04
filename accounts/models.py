@@ -52,6 +52,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_plan_active = models.BooleanField(default=False)
     image_credits = models.IntegerField(default=0)
     next_free_credits_date = models.DateField(null=True, blank=True)
+    api_compressions = models.IntegerField(default=0)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["is_staff"]

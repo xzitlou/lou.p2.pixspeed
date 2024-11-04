@@ -302,6 +302,20 @@ body {
     max-width: 120px;
 }
 
+.bg-light-gray {
+    background-color: #f9f9f9;
+}
+
+#copy-confirmation {
+    display: none;
+    position: absolute;
+    bottom: -15px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
 @media (max-width: 480px) {
     .page-header {
         font-size: 50px;

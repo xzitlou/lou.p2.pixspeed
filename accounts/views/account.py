@@ -1,4 +1,4 @@
-from django.contrib.auth import login, logout, update_session_auth_hash
+from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -152,102 +152,6 @@ class AccountPage(LoginRequiredMixin, View):
                 "description": "",
                 "g": settings,
                 "reasons": [item for k, item in settings.get("i18n").items() if "cancellation_reason_" in k]
-            }
-        )
-        return response
-
-
-class AccountSecurityPage(LoginRequiredMixin, View):
-    login_url = "login"
-    errors = None
-    settings = None
-
-    def dispatch(self, request, *args, **kwargs):
-        self.settings = GlobalVars.get_globals(request)
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request):
-        response = render(
-            request,
-            "views/account.security.html",
-            {
-                "page": "account",
-                "title": f"Security - PixSpeed.com",
-                "description": "",
-                "g": self.settings,
-                "errors": self.errors,
-                "data": request.GET,
-            }
-        )
-        return response
-
-    def post(self, request):
-        account, errors = request.user.update_password(
-            data=request.POST,
-            i18n=self.settings.get("i18n")
-        )
-
-        if errors:
-            self.errors = errors
-            return self.get(request)
-
-        update_session_auth_hash(request, account)
-        return redirect(reverse("account-security") + "?status=1")
-
-
-class AccountCancelSubscriptionPage(LoginRequiredMixin, View):
-    login_url = "login"
-    errors = None
-    settings = None
-
-    def dispatch(self, request, *args, **kwargs):
-        self.settings = GlobalVars.get_globals(request)
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request):
-        response = render(
-            request,
-            "views/account.cancel-subscription.html",
-            {
-                "page": "account",
-                "title": f"Cancel subscription - PixSpeed.com",
-                "description": "",
-                "g": self.settings,
-                "errors": self.errors,
-                "data": request.GET,
-            }
-        )
-        Utils.print_connections()
-
-        return response
-
-    def post(self, request):
-        data = request.POST
-        errors = request.user.cancel_subscription(
-            reasons=data.get("reasons", []),
-            cancellation_type="subscription"
-        )
-
-        if errors:
-            self.errors = errors
-            return self.get(request)
-
-        return redirect(reverse("account-cancel-subscription") + "?status=1")
-
-
-class AccountConversionsPage(LoginRequiredMixin, View):
-    login_url = "login"
-
-    def get(self, request):
-        settings = GlobalVars.get_globals(request)
-        response = render(
-            request,
-            "views/account.conversions.html",
-            {
-                "page": "account",
-                "title": f"Conversions - PixSpeed.com",
-                "description": "",
-                "g": settings,
             }
         )
         return response
