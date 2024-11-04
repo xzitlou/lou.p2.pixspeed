@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container my-3">
-        <div class="p-3">
-            <h1 class="page-header fw-bold text-truncate mb-0">Account</h1>
-            <div>{{ user.email }}</div>
-        </div>
-        <div class="d-flex flex-column flex-sm-row align-items-start">
-            <a href="{% url 'account-billing' %}" class="btn text-primary">Payments</a>
+        <h1 class="page-header fw-bold text-truncate mb-0">Account</h1>
+        <div>{{ user.email }}</div>
+        <div class="d-flex flex-column flex-sm-row align-items-start py-3">
+            <a href="{% url 'account-billing' %}" class="icon-link">Payments</a>
         </div>
         <div class="bg-light-gray p-4 rounded-4 mt-4">
             <h4 class="fw-bold">API</h4>
@@ -30,13 +28,13 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-2 form-text">Revisa la documentación de nuestro API. <a href="">API Guide</a></div>
+            <div class="mt-2 form-text">Check our API documentation. <a href="">API Guide</a></div>
         </div>
         <div class="bg-light-gray p-4 rounded-4 mt-4">
             <h4 class="fw-bold text-danger">Delete account</h4>
             <p class="fw-bold">Be careful! This process has no return</p>
             <p>All the information related to your account will be permanently delete. This includes information about your payments and notifications. You will lose any PRO benefits as well and your subscription if you have one will be cancelled</p>
-            <a href="" class="btn btn-outline-danger rounded-pill">I'm sure, continue deleting my account</a>
+            <a href="{% url "delete-account" %}" class="btn btn-outline-danger rounded-pill">I'm sure, continue deleting my account</a>
         </div>
     </div>
     <div class="modal fade" id="regenerateKeyModal" tabindex="-1" aria-labelledby="regenerateKeyModal" aria-hidden="true">

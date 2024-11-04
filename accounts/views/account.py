@@ -174,3 +174,38 @@ class AccountBillingPage(LoginRequiredMixin, View):
             }
         )
         return response
+
+
+class AccountDeletePage(LoginRequiredMixin, View):
+    login_url = "login"
+
+    @staticmethod
+    def get(request):
+        settings = GlobalVars.get_globals(request)
+        response = render(
+            request,
+            "views/account.delete.html",
+            {
+                "page": "account",
+                "title": f"%s | Yout.com" % settings.get("i18n").get("delete_account"),
+                "description": settings.get("i18n").get("delete_account"),
+                "g": settings,
+            }
+        )
+        Utils.print_connections()
+
+        return response
+
+    @staticmethod
+    def post(request, *args, **kwargs):
+        Utils.send_email(
+            recipients=[request.user.email],
+            subject="Your account at PixSpeed.com has been successfully deleted",
+            template="account.deleted.html",
+            data={
+                "user": request.user
+            }
+        )
+        request.user.delete()
+
+        return redirect("index")

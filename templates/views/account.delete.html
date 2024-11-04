@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container my-3">
+        <div class="row justify-content-center">
+            <div class="pixspeed-col">
+                <div class="mb-2">
+                    <a href="{% url 'account' %}" class="btn btn-light rounded-pill">← Back to account</a>
+                </div>
+                <div class="mt-4">
+                    <h1 class="page-header fw-bold text-truncate mb-0">Delete account</h1>
+                    <div>{{ user.email }}</div>
+                    <div class="bg-light-gray p-4 rounded-4 mt-4">
+                        <form action="{{ request.path }}" method="post" class="cancel-subscription">
+                            {% csrf_token %}
+                            <p>Are you sure you want to delete your account?</p>
+                            <p>All the information related to your account will be permanently delete. This includes information about your payments and notifications. You will lose any credits.</p>
+                            <p>If you're certain, please confirm by clicking 'Delete My Account'.</p>
+                            <div class="mt-4 d-grid">
+                                <button class="btn btn-danger rounded-pill">Delete my account</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}l
