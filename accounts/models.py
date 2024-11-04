@@ -1,3 +1,4 @@
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core.paginator import Paginator
@@ -50,6 +51,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     plan_subscribed = models.CharField(max_length=50, null=True, blank=True)
     is_plan_active = models.BooleanField(default=False)
     image_credits = models.IntegerField(default=0)
+    next_free_credits_date = models.DateField(null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["is_staff"]
@@ -185,7 +187,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         user = CustomUser.objects.create(
             full_name=full_name.title(),
             email=email,
-            lang=lang
+            lang=lang,
+            image_credits=300,
+            next_free_credits_date=timezone.now() + relativedelta(months=1),
         )
         user.set_password(Utils.generate_hex_uuid())
         user.save()
