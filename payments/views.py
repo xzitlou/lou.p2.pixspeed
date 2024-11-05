@@ -67,7 +67,6 @@ class PaymentPage(View):
                     payment_id=result.body['payment']['id'],
                     total_credits=total_credits,
                     status='COMPLETED',
-                    payment_method=payment_method,
                 )
                 return redirect("thanks")
 

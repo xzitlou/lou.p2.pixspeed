@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+    <div id="fullWrapper" class="d-flex flex-column justify-content-center">
+        <div class="container py-3">
+            <div class="row justify-content-center">
+                <div class="pixspeed-col-col">
+                    <div class="text-center">
+                        <div class="mb-2 thanks-check-icon">{% include "svgs/check.svg" %}</div>
+                        <h1 class="fw-bold mt-4">	Your payment is successful</h1>
+                        <div>Thank you for your payment. Your credits have been added to your account.</div>
+                        <div class="mt-4">
+                            <a href="{% url "index" %}" class="btn btn-outline-dark rounded-pill">← Back to PixSpeed.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
