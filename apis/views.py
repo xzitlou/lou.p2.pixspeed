@@ -272,13 +272,17 @@ class TokenVerificationAPI(View):
                 api_token=request.headers.get("key", None)
             )
 
-            if user.image_credits <= 0:
+            if user.get_total_credits() <= 0:
                 return JsonResponse({"error": "You need more credits"}, status=400)
 
-            user.image_credits -= 1
+            if user.free_image_credits:
+                user.free_image_credits -= 1
+            else:
+                user.image_credits -= 1
+
             user.api_compressions += 1
             user.save()
-            return JsonResponse({"status": True, "remaining_credits": user.image_credits})
+            return JsonResponse({"status": True, "remaining_credits": user.free_image_credits()})
 
         except Exception as e:
             print(str(e))

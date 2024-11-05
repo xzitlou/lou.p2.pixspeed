@@ -16,6 +16,6 @@ class Command(BaseCommand):
             next_free_credits_date__month=today.month,
             next_free_credits_date__year=today.year,
         ):
-            user.image_credits += 300
+            user.free_image_credits = 300
             user.next_free_credits_date += relativedelta(months=1)
             user.save()

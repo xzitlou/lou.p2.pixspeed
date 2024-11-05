@@ -51,6 +51,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     plan_subscribed = models.CharField(max_length=50, null=True, blank=True)
     is_plan_active = models.BooleanField(default=False)
     image_credits = models.IntegerField(default=0)
+    free_image_credits = models.IntegerField(default=0)
     next_free_credits_date = models.DateField(null=True, blank=True)
     api_compressions = models.IntegerField(default=0)
 
@@ -61,6 +62,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+    def get_total_credits(self):
+        return self.free_image_credits + self.image_credits
 
     def has_pro_benefits(self):
         if not self.is_authenticated:
