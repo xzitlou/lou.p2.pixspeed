@@ -5,6 +5,7 @@ from django.views.generic import RedirectView
 from accounts.views.account import LoginPage, LogoutPage, SignupPage, MagicAccessPage
 from app.views import TermsPage, PrivacyPage, IndexPage, ThanksPage, HowItWorksPage, FAQPage
 from contact_messages.views import ContactPage
+from payments.views import PaymentPage
 
 admin.site.site_title = "PixSpeed.com"
 urlpatterns = [
@@ -24,4 +25,5 @@ urlpatterns = [
     path("privacy/", PrivacyPage.as_view(), name="privacy"),
     path("how-it-works/", HowItWorksPage.as_view(), name="how-it-works"),
     path("frequently-asked-questions/", FAQPage.as_view(), name="faq"),
+    path("checkout/", PaymentPage.as_view(), name="checkout"),
 ]

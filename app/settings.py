@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'commons',
     'translations',
     "captcha",
+    "payments",
 ]
 
 MIDDLEWARE = [

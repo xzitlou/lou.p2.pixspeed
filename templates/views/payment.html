@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container py-3">
+        <div class="row justify-content-center">
+            <div class="pixspeed-col">
+                <h1 class="page-header fw-bold">Pricing</h1>
+                <div class="small mt-4">
+                    <div class="d-flex w-100">
+                        <div>First <b>10 000</b> image compressions</div>
+                        <div class="ms-auto"><b>US$ 0.009</b> per image</div>
+                    </div>
+                    <div class="d-flex w-100 pt-1 mt-1 border-top">
+                        <div>After <b>10 000</b> image compressions</div>
+                        <div class="ms-auto"><b>US$ 0.002</b> per image</div>
+                    </div>
+                </div>
+                <div class="bg-light-gray p-4 rounded-4 mt-4">
+                    {% if errors %}
+                        <div class="alert alert-danger mb-2">
+                            {% for error in errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="authorize-container">
+                        <form id="checkoutForm" action="{{ request.path }}" method="post" class="floating-label-form">
+                            {% csrf_token %}
+                            <div id="card-container"></div>
+                            <div class="form-group">
+                                <label for="creditsRange" class="form-label">Credits</label>
+                                <div class="form-text">Compressed images: <span id="selectedCredits" class="fw-bold">2000</span></div>
+                                <input type="range" class="form-range" min="0" max="1000000" step="100" value="2000" id="creditsRange">
+                            </div>
+                            <div class="d-grid mt-5">
+                                <button class="btn btn-lg btn-primary rounded-pill">Pay now <span id="price" class="fw-bold">0</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="{{ squareup.js }}"></script>
+    <script defer>
+        (function () {
+            "use strict";
+            $(document).ready(function () {
+                const appId = "{{ squareup.app_id }}";
+                const locationId = "{{ squareup.location_id }}";
+
+                function formatCredits(credits) {
+                    return credits.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                }
+
+                function calculatePrice(credits) {
+                    // Lógica de precios
+                    if (credits <= 10000) {
+                        return (credits * 0.009).toFixed(2);
+                    } else {
+                        return (credits * 0.002).toFixed(2);
+                    }
+                }
+
+                // Actualiza el valor y el precio en tiempo real
+                $('#creditsRange').on('input', function () {
+                    var credits = $(this).val();
+                    $('#selectedCredits').text(formatCredits(credits));
+                    $('#price').text(calculatePrice(credits));
+                });
+
+                // Establece el precio inicial en 2000 créditos
+                $('#price').text(calculatePrice(2000));
+
+                async function initializeSquare() {
+                    if (!window.Square) {
+                        $('#payment-status').text("Square payment SDK failed to load.");
+                        return;
+                    }
+
+                    const payments = Square.payments(appId, locationId);
+                    const card = await payments.card();
+
+                    await card.attach('#card-container');
+
+                    $('#payment-button').on('click', async function () {
+                        const credits = $('#credits').val();
+                        if (!credits) {
+                            $('#payment-status').text("Please enter credits.");
+                            return;
+                        }
+
+                        try {
+                            const result = await card.tokenize();
+                            if (result.status === 'OK') {
+                                processPayment(result.token, credits);
+                            } else {
+                                $('#payment-status').text("Payment failed: " + result.errors[0].message);
+                            }
+                        } catch (error) {
+                            $('#payment-status').text("Error processing payment: " + error.message);
+                        }
+                    });
+                }
+
+                async function processPayment(nonce, credits) {
+                    $.ajax({
+                        url: '/payment/',
+                        method: 'POST',
+                        data: {
+                            nonce: nonce,
+                            credits: credits,
+                            method: 'square'
+                        },
+                        success: function (response) {
+                            $('#payment-status').text("Payment successful! Credits added.");
+                        },
+                        error: function (xhr) {
+                            const errorMessage = xhr.responseJSON?.error || "Payment failed. Please try again.";
+                            $('#payment-status').text(errorMessage);
+                        }
+                    });
+                }
+
+                initializeSquare();
+            });
+        }());
+    </script>
+{% endblock %}

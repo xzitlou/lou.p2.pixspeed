@@ -350,6 +350,10 @@ pre {
     color: #008080;
 }
 
+span.sq-card-message {
+    margin-top: 0 !important;
+}
+
 @media (max-width: 480px) {
     .page-header {
         font-size: 50px;
