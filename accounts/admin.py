@@ -36,6 +36,7 @@ class CustomUserAdmin(BaseUserAdmin):
             'fields': (
                 "api_token",
                 "image_credits",
+                "next_free_credits_date",
             )
         }),
         ('Billing', {
