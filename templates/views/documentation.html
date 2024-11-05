@@ -5,6 +5,10 @@
             <div class="col-lg-5">
                 <div class="position-sticky" style="top: 50px">
                     <h1 class="page-header mb-3 fw-semibold">PixSpeed API</h1>
+                    <p>The first <u>300</u> compressions each month are free.</p>
+                    {% if not user.is_authenticated %}
+                        <a href="{% url "signup" %}">Sign up now</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-lg-7">
