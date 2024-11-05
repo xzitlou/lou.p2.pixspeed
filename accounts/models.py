@@ -193,7 +193,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             full_name=full_name.title(),
             email=email,
             lang=lang,
-            image_credits=300,
+            free_image_credits=300,
             next_free_credits_date=timezone.now() + relativedelta(months=1),
         )
         user.set_password(Utils.generate_hex_uuid())
