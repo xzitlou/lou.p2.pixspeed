@@ -148,10 +148,9 @@ class AccountPage(LoginRequiredMixin, View):
             "views/account.html",
             {
                 "page": "account",
-                "title": f"{settings.get('i18n').get('account_title')} - PixSpeed.com",
+                "title": f"Account - PixSpeed.com",
                 "description": "",
                 "g": settings,
-                "reasons": [item for k, item in settings.get("i18n").items() if "cancellation_reason_" in k]
             }
         )
         return response
