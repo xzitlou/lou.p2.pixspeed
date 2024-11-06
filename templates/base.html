@@ -78,7 +78,7 @@
                         <a class="nav-link" href="{% url "faq" %}?lang={{ g.lang.iso }}">FAQ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url "checkout" %}?lang={{ g.lang.iso }}">Pricing</a>
+                        <a class="nav-link" href="{% url "checkout" %}?lang={{ g.lang.iso }}">{{ g.i18n.pricing_menu }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url "api-documentation-page" %}?lang={{ g.lang.iso }}">API</a>

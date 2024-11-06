@@ -70,8 +70,7 @@ class ThanksPage(LoginRequiredMixin, View):
             "views/thanks.html",
             {
                 "page": "thanks",
-                "title": f"{settings.get('i18n').get('thanks_title')} | PixSpeed.com",
-                "description": settings.get('i18n').get('thanks_meta'),
+                "title": f"Thanks for your purchase | PixSpeed.com",
                 "g": settings,
             }
         )

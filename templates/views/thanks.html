@@ -6,10 +6,10 @@
                 <div class="pixspeed-col-col">
                     <div class="text-center">
                         <div class="mb-2 thanks-check-icon">{% include "svgs/check.svg" %}</div>
-                        <h1 class="fw-bold mt-4">	Your payment is successful</h1>
-                        <div>Thank you for your payment. Your credits have been added to your account.</div>
+                        <h1 class="fw-bold mt-4">{{ g.i18n.thanks_h1 }}</h1>
+                        <div>{{ g.i18n.thanks_description }}</div>
                         <div class="mt-4">
-                            <a href="{% url "index" %}" class="btn btn-outline-dark rounded-pill">← Back to PixSpeed.com</a>
+                            <a href="{% url "index" %}" class="btn btn-outline-dark rounded-pill">← {{ g.i18n.back_home }}</a>
                         </div>
                     </div>
                 </div>

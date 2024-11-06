@@ -23,8 +23,8 @@ class PaymentPage(View):
             request,
             "views/payment.html",
             {
-                "title": f"Check-out - PixSpeed.com",
-                "description": "",
+                "title": f"{self.settings.get('i18n').get('api_pricing')} - PixSpeed.com",
+                "description": self.settings.get("i18n").get("api_pricing_meta"),
                 "errors": self.errors,
                 "g": self.settings,
                 "squareup": SQUARE_KEYS,
@@ -36,7 +36,6 @@ class PaymentPage(View):
     def post(self, request, *args, **kwargs):
         data = request.POST
         total_credits = int(data.get("credits"))
-        payment_method = data.get("method")
         nonce = data.get("nonce")
 
         if total_credits <= 10000:
