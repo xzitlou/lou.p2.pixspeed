@@ -63,96 +63,100 @@
     </script>
 {% endblock %}
 {% block content %}
-    <div class="container py-sm-5 py-3">
-        <div class="row align-items-center pt-sm-4 pt-0">
-            <div class="col-lg-6">
-                <h3 class="pre-title text-secondary">{{ g.i18n.home_h3 }} ...</h3>
-                <h1 class="page-header mb-3 fw-bold lh-1">{{ g.i18n.home_h1 }}</h1>
-                <h2 class="lead mb-4 after-title m-0">{{ g.i18n.home_h2 }}</h2>
-            </div>
-            <div class="col-lg-6 mx-auto">
-                <div class="highlight p-3 border rounded-2">
-                    <form id="websiteForm" action="{{ request.path }}" method="post">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="website" class="form-label fw-bold m-0">{{ g.i18n.label_website }}</label>
-                            <div class="form-text">{{ g.i18n.input_url_disclaimer }}</div>
-                            <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://pixspeed.com" autofocus required>
-                        </div>
-                        <div id="websiteHelp" class="form-text mb-3">{{ g.i18n.placeholder_website }}</div>
-                        <button type="submit" class="btn btn-lg bd-btn-lg btn-bd-primary d-flex align-items-center justify-content-center fw-semibold w-100" id="submitButton">
-                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                            {{ g.i18n.submit }}
-                        </button>
-                        <div class="mt-2 text-center small">** {{ g.i18n.images_deleted }}</div>
-                    </form>
+    <div class="bg-melon-light border-bottom border-5 border-black">
+        <div class="container py-sm-5 py-3">
+            <div class="row align-items-center pt-sm-4 pt-0">
+                <div class="col-lg-6">
+                    <h3 class="pre-title text-secondary">{{ g.i18n.home_h3 }} ...</h3>
+                    <h1 class="page-header mb-3 fw-bold lh-1">{{ g.i18n.home_h1 }}</h1>
+                    <h2 class="lead mb-4 after-title m-0">{{ g.i18n.home_h2 }}</h2>
+                </div>
+                <div class="col-lg-6 mx-auto">
+                    <div class="highlight p-3 border rounded-2">
+                        <form id="websiteForm" action="{{ request.path }}" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="website" class="form-label fw-bold m-0">{{ g.i18n.label_website }}</label>
+                                <div class="form-text">{{ g.i18n.input_url_disclaimer }}</div>
+                                <input type="url" class="form-control py-3" id="website" name="website" placeholder="https://pixspeed.com" autofocus required>
+                            </div>
+                            <div id="websiteHelp" class="form-text mb-3">{{ g.i18n.placeholder_website }}</div>
+                            <button type="submit" class="btn btn-lg bd-btn-lg btn-primary d-flex align-items-center justify-content-center fw-semibold w-100" id="submitButton">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                {{ g.i18n.submit }}
+                            </button>
+                            <div class="mt-2 text-center small">** {{ g.i18n.images_deleted }}</div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div id="listImages"></div>
+        </div>
     </div>
-    <div class="container pt-3">
-        <div id="listImages"></div>
-    </div>
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="position-sticky" style="top: 50px">
-                    <h2 class="page-header mb-3 fw-semibold lh-1">{{ g.i18n.how_it_works }}</h2>
-                    <p>{{ g.i18n.how_it_works_subtitle }}</p>
+    <div class="border-bottom border-5 border-black bg-white">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="position-sticky" style="top: 50px">
+                        <h2 class="page-header mb-3 fw-semibold lh-1">{{ g.i18n.how_it_works }}</h2>
+                        <p>{{ g.i18n.how_it_works_subtitle }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="bsb-timeline-1 pt-5 pt-xl-8 ms-2">
-                    <ul class="timeline">
-                        <li class="timeline-item">
-                            <div class="timeline-body">
-                                <div class="timeline-content">
-                                    <div class="card border-0">
-                                        <div class="card-body p-0">
-                                            <h5 class="card-subtitle mb-1 fw-bold">1: {{ g.i18n.upload_your_images }}</h5>
-                                            <p class="card-text m-0">{{ g.i18n.upload_your_images_description }}</p>
+                <div class="col-lg-6">
+                    <div class="bsb-timeline-1 pt-5 pt-xl-8 ms-2">
+                        <ul class="timeline">
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">1: {{ g.i18n.upload_your_images }}</h5>
+                                                <p class="card-text m-0">{{ g.i18n.upload_your_images_description }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item">
-                            <div class="timeline-body">
-                                <div class="timeline-content">
-                                    <div class="card border-0">
-                                        <div class="card-body p-0">
-                                            <h5 class="card-subtitle mb-1 fw-bold">2: {{ g.i18n.automated_optimization }}</h5>
-                                            <p class="card-text m-0">{{ g.i18n.automated_optimization_description }}</p>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">2: {{ g.i18n.automated_optimization }}</h5>
+                                                <p class="card-text m-0">{{ g.i18n.automated_optimization_description }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item">
-                            <div class="timeline-body">
-                                <div class="timeline-content">
-                                    <div class="card border-0">
-                                        <div class="card-body p-0">
-                                            <h5 class="card-subtitle mb-1 fw-bold">3: {{ g.i18n.download_optimized_images }}</h5>
-                                            <p class="card-text m-0">{{ g.i18n.download_optimized_images_description }}</p>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">3: {{ g.i18n.download_optimized_images }}</h5>
+                                                <p class="card-text m-0">{{ g.i18n.download_optimized_images_description }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item">
-                            <div class="timeline-body">
-                                <div class="timeline-content">
-                                    <div class="card border-0">
-                                        <div class="card-body p-0">
-                                            <h5 class="card-subtitle mb-1 fw-bold">4: {{ g.i18n.implement_images }}</h5>
-                                            <p class="card-text m-0">{{ g.i18n.implement_images_description }}</p>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">4: {{ g.i18n.implement_images }}</h5>
+                                                <p class="card-text m-0">{{ g.i18n.implement_images_description }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

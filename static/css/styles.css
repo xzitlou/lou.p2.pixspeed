@@ -1,11 +1,25 @@
+html, body {
+    background: rgb(255 251 235);
+}
+
 body {
     font-size: 16px;
     color: #000;
 }
 
+.navbar {
+    background: rgb(255 251 235);
+}
+
 #footer {
-    font-size: 12px;
-    color: rgba(33, 37, 41, 0.75);
+    background: #000;
+    font-size: 16px;
+    color: #fff;
+}
+
+#footer a {
+    color: #fff;
+    text-decoration: none;
 }
 
 .page-header {
@@ -17,7 +31,9 @@ body {
 }
 
 .highlight {
-    background-color: #f8f9fa;
+    background-color: #fff;
+    border: 3px solid #000 !important;
+    box-shadow: 6px 6px 0 0 #000;
 }
 
 .images-found .icon {
@@ -44,7 +60,7 @@ body {
 }
 
 .images-found .found-images-list > div {
-    background-color: #fff;
+    background-color: #f9f9f9;
     border-radius: 5px;
     padding: 5px;
 }
@@ -114,11 +130,11 @@ body {
 }
 
 #navbarMenuContent a {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     line-height: 1;
     border-radius: 5px;
-    padding: 12px 18px;
+    padding: 12px;
     opacity: 1;
     transition: background 200ms;
 }
@@ -219,8 +235,8 @@ body {
 }
 
 .bsb-timeline-1 {
-    --bsb-tl-color: var(--bs-primary-bg-subtle);
-    --bsb-tl-circle-color: var(--bs-primary);
+    --bsb-tl-color: rgb(69 173 148);
+    --bsb-tl-circle-color: rgb(69 173 148);
     --bsb-tl-circle-size: 18px;
     --bsb-tl-circle-offset: 9px;
 }
@@ -360,7 +376,25 @@ span.sq-card-message {
 }
 
 #fullWrapper {
-    min-height: calc(1vh* 100 - 300px);
+    min-height: calc(1vh * 100 - 300px);
+}
+
+.bg-melon-light {
+    background: rgb(255 251 235);
+}
+
+.btn {
+    box-shadow: 4px 4px 0 0 #000 !important;
+}
+
+.card {
+    background: transparent;
+}
+
+.metric-item {
+    background-color: #fff;
+    border: 3px solid #000 !important;
+    box-shadow: 6px 6px 0 0 #000;
 }
 
 @media (max-width: 480px) {

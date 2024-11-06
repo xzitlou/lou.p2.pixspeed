@@ -42,76 +42,80 @@
     </script>
 {% endblock %}
 {% block content %}
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="position-sticky" style="top: 50px">
-                    <h1 class="page-header mb-3 fw-semibold lh-1">{{ g.i18n.how_it_works }}</h1>
-                    <p>{{ g.i18n.how_it_works_subtitle }}</p>
+    <div class="border-5 border-black border-bottom">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="position-sticky" style="top: 50px">
+                        <h1 class="page-header mb-3 fw-semibold lh-1">{{ g.i18n.how_it_works }}</h1>
+                        <p>{{ g.i18n.how_it_works_subtitle }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="bsb-timeline-1 pt-5 pt-xl-8 ms-2">
-                    <ul class="timeline">
-                        <li class="timeline-item">
-                            <div class="timeline-body">
-                                <div class="timeline-content">
-                                    <div class="card border-0">
-                                        <div class="card-body p-0">
-                                            <h5 class="card-subtitle mb-1 fw-bold">1: {{ g.i18n.upload_your_images }}</h5>
-                                            <p class="card-text m-0">{{ g.i18n.upload_your_images_description }}</p>
+                <div class="col-lg-6">
+                    <div class="bsb-timeline-1 pt-5 pt-xl-8 ms-2">
+                        <ul class="timeline">
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">1: {{ g.i18n.upload_your_images }}</h5>
+                                                <p class="card-text m-0">{{ g.i18n.upload_your_images_description }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item">
-                            <div class="timeline-body">
-                                <div class="timeline-content">
-                                    <div class="card border-0">
-                                        <div class="card-body p-0">
-                                            <h5 class="card-subtitle mb-1 fw-bold">2: {{ g.i18n.automated_optimization }}</h5>
-                                            <p class="card-text m-0">{{ g.i18n.automated_optimization_description }}</p>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">2: {{ g.i18n.automated_optimization }}</h5>
+                                                <p class="card-text m-0">{{ g.i18n.automated_optimization_description }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item">
-                            <div class="timeline-body">
-                                <div class="timeline-content">
-                                    <div class="card border-0">
-                                        <div class="card-body p-0">
-                                            <h5 class="card-subtitle mb-1 fw-bold">3: {{ g.i18n.download_optimized_images }}</h5>
-                                            <p class="card-text m-0">{{ g.i18n.download_optimized_images_description }}</p>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">3: {{ g.i18n.download_optimized_images }}</h5>
+                                                <p class="card-text m-0">{{ g.i18n.download_optimized_images_description }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="timeline-item">
-                            <div class="timeline-body">
-                                <div class="timeline-content">
-                                    <div class="card border-0">
-                                        <div class="card-body p-0">
-                                            <h5 class="card-subtitle mb-1 fw-bold">4: {{ g.i18n.implement_images }}</h5>
-                                            <p class="card-text m-0">{{ g.i18n.implement_images_description }}</p>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-body">
+                                    <div class="timeline-content">
+                                        <div class="card border-0">
+                                            <div class="card-body p-0">
+                                                <h5 class="card-subtitle mb-1 fw-bold">4: {{ g.i18n.implement_images }}</h5>
+                                                <p class="card-text m-0">{{ g.i18n.implement_images_description }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="text-center mt-5 pt-5">
+    </div>
+    <div class="border-bottom border-5 border-black bg-white mb-5 pb-5">
+        <div class="text-center pt-5">
             <div class="col-sm-6 mx-auto">
                 <h2>{{ g.i18n.why_use }}</h2>
                 <p>{{ g.i18n.why_use_description }}</p>
             </div>
         </div>
-        <div class="text-center mt-5 pt-5">
+        <div class="text-center pt-5 mt-5">
             <div class="col-sm-6 mx-auto">
                 <h2>{{ g.i18n.try_now }}</h2>
                 <p>{{ g.i18n.try_now_description }}</p>

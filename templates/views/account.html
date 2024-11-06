@@ -1,49 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container my-3">
-        <h1 class="page-header fw-bold text-truncate mb-0">{{ g.i18n.account_title }}</h1>
-        <div>{{ user.email }}</div>
-        {% comment %}
+        <div class="highlight p-4 rounded-3">
+            <h1 class="page-header fw-bold text-truncate mb-0">{{ g.i18n.account_title }}</h1>
+            <div>{{ user.email }}</div>
+            {% comment %}
         <div class="d-flex flex-column flex-sm-row align-items-start py-3">
             <a href="{% url 'account-billing' %}" class="icon-link">Payments</a>
         </div>
         {% endcomment %}
-        <div class="bg-light-gray p-4 rounded-4 mt-4">
-            {{ g.i18n.next_free_credits_date | safe }} {{ user.next_free_credits_date }}
-        </div>
-        <div class="bg-light-gray p-4 rounded-4 mt-4">
-            <h4 class="fw-bold">API</h4>
-            <div class="d-flex flex-sm-row flex-column align-items-start gap-4 bg-white rounded-3 p-3">
-                <div class="flex-grow-1">
-                    <div class="form-text m-0">Key</div>
-                    <div class="position-relative">
-                        <div id="{{ user.api_token }}" class="fw-bold copy-api-token pointer">{{ user.api_token }}</div>
-                        <div id="copy-confirmation" class="text-primary small">{{ g.i18n.copied }}</div>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div>
-                        <div class="form-text m-0">{{ g.i18n.available_credits }}</div>
-                        <div>{{ user.get_total_credits }}</div>
-                    </div>
-                    <div class="ms-4">
-                        <div class="form-text m-0">{{ g.i18n.total_compressions }}</div>
-                        <div>{{ user.api_compressions }}</div>
-                    </div>
-                </div>
-                <div class="ms-0 ms-sm-4">
-                    <div>
-                        <button class="btn btn-warning rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#regenerateKeyModal">{{ g.i18n.new_key }}</button>
-                    </div>
-                </div>
+            <div class="bg-light-gray p-4 rounded-4 mt-4">
+                {{ g.i18n.next_free_credits_date | safe }} {{ user.next_free_credits_date }}
             </div>
-            <div class="mt-2 form-text">{{ g.i18n.check_documentation }} <a href="{% url "api-documentation-page" %}">{{ g.i18n.api_guide }}</a></div>
-        </div>
-        <div class="bg-light-gray p-4 rounded-4 mt-4">
-            <h4 class="fw-bold text-danger">{{ g.i18n.delete_account }}</h4>
-            <p class="fw-bold">{{ g.i18n.delete_account_careful }}</p>
-            <p>{{ g.i18n.delete_account_description }}</p>
-            <a href="{% url "delete-account" %}" class="btn btn-outline-danger rounded-pill">{{ g.i18n.delete_account_continue }}</a>
+            <div class="bg-light-gray p-4 rounded-4 mt-4">
+                <h4 class="fw-bold">API</h4>
+                <div class="d-flex flex-sm-row flex-column align-items-start gap-4 bg-white rounded-3 p-3">
+                    <div class="flex-grow-1">
+                        <div class="form-text m-0">Key</div>
+                        <div class="position-relative">
+                            <div id="{{ user.api_token }}" class="fw-bold copy-api-token pointer">{{ user.api_token }}</div>
+                            <div id="copy-confirmation" class="text-primary small">{{ g.i18n.copied }}</div>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div>
+                            <div class="form-text m-0">{{ g.i18n.available_credits }}</div>
+                            <div>{{ user.get_total_credits }}</div>
+                        </div>
+                        <div class="ms-4">
+                            <div class="form-text m-0">{{ g.i18n.total_compressions }}</div>
+                            <div>{{ user.api_compressions }}</div>
+                        </div>
+                    </div>
+                    <div class="ms-0 ms-sm-4">
+                        <div>
+                            <button class="btn btn-warning rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#regenerateKeyModal">{{ g.i18n.new_key }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 form-text">{{ g.i18n.check_documentation }} <a href="{% url "api-documentation-page" %}">{{ g.i18n.api_guide }}</a></div>
+            </div>
+            <div class="bg-light-gray p-4 rounded-4 mt-4">
+                <h4 class="fw-bold text-danger">{{ g.i18n.delete_account }}</h4>
+                <p class="fw-bold">{{ g.i18n.delete_account_careful }}</p>
+                <p>{{ g.i18n.delete_account_description }}</p>
+                <a href="{% url "delete-account" %}" class="btn btn-outline-danger rounded-pill">{{ g.i18n.delete_account_continue }}</a>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="regenerateKeyModal" tabindex="-1" aria-labelledby="regenerateKeyModal" aria-hidden="true">

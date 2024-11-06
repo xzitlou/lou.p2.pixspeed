@@ -12,35 +12,37 @@
                 </div>
             </div>
             <div class="col-lg-7">
-                <p>{{ g.i18n.api_documentation_intro }}</p>
-                <p>{{ g.i18n.api_documentation_url | safe }}</p>
-                <br>
-                <h3>{{ g.i18n.api_documentation_authentication }}</h3>
-                <p>{{ g.i18n.api_documentation_authentication_1 }}</p>
-                <p>{{ g.i18n.api_documentation_authentication_2 | safe }}</p>
-                <p>{{ g.i18n.api_documentation_authentication_3 }}</p>
-                <br>
-                <h3>{{ g.i18n.api_documentation_compress }}</h3>
-                <p>{{ g.i18n.api_documentation_compress_1 }}</p>
-                <p><b>{{ g.i18n.api_documentation_compress_example }}</b></p>
-                <p>{{ g.i18n.api_documentation_compress_example_intro | safe }}</p>
-                <pre><code class="lang-http">curl -X POST https://api.pixspeed.com/v1/url \
+                <div class="highlight p-4 rounded-3">
+                    <p>{{ g.i18n.api_documentation_intro }}</p>
+                    <p>{{ g.i18n.api_documentation_url | safe }}</p>
+                    <br>
+                    <h3>{{ g.i18n.api_documentation_authentication }}</h3>
+                    <p>{{ g.i18n.api_documentation_authentication_1 }}</p>
+                    <p>{{ g.i18n.api_documentation_authentication_2 | safe }}</p>
+                    <p>{{ g.i18n.api_documentation_authentication_3 }}</p>
+                    <br>
+                    <h3>{{ g.i18n.api_documentation_compress }}</h3>
+                    <p>{{ g.i18n.api_documentation_compress_1 }}</p>
+                    <p><b>{{ g.i18n.api_documentation_compress_example }}</b></p>
+                    <p>{{ g.i18n.api_documentation_compress_example_intro | safe }}</p>
+                    <pre><code class="lang-http">curl -X POST https://api.pixspeed.com/v1/url \
      -H "Content-Type: application/json" \
      -H "key: YOUR_API_KEY" \
      -d '{"url": "https://example.com/path/to/your-image.jpg"}'
 </code></pre>
-                <p>{{ g.i18n.api_documentation_compress_example_intro_1 | safe }}</p>
-                <br>
-                <h3>{{ g.i18n.api_documentation_optimize }}</h3>
-                <p>{{ g.i18n.api_documentation_optimize_1 | safe }}</p>
-                <p><b>{{ g.i18n.api_documentation_optimize_example }}</b></p>
-                <p>{{ g.i18n.api_documentation_optimize_example_1 | safe }}</p>
-                <pre><code class="lang-http">curl -X POST https://api.pixspeed.com/v1/url \
+                    <p>{{ g.i18n.api_documentation_compress_example_intro_1 | safe }}</p>
+                    <br>
+                    <h3>{{ g.i18n.api_documentation_optimize }}</h3>
+                    <p>{{ g.i18n.api_documentation_optimize_1 | safe }}</p>
+                    <p><b>{{ g.i18n.api_documentation_optimize_example }}</b></p>
+                    <p>{{ g.i18n.api_documentation_optimize_example_1 | safe }}</p>
+                    <pre><code class="lang-http">curl -X POST https://api.pixspeed.com/v1/url \
      -H "Content-Type: application/json" \
      -H "key: YOUR_API_KEY" \
      -d '{"url": "https://example.com/path/to/your-image.jpg", "format": "webp"}'
 </code></pre>
-                <p>{{ g.i18n.api_documentation_optimize_example_2 | safe }}</p>
+                    <p>{{ g.i18n.api_documentation_optimize_example_2 | safe }}</p>
+                </div>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container py-3">
-        <div class="row justify-content-center">
-            <div class="pixspeed-col">
+        <div class="pixspeed-col mx-auto">
+            <div class="highlight p-4 rounded-3">
                 <h1 class="page-header fw-bold">{{ g.i18n.api_pricing }}</h1>
                 <div class="small mt-4">
                     <div class="w-100">{{ g.i18n.api_pricing_free_credits | safe }}</div>
@@ -42,7 +42,6 @@
             </div>
         </div>
     </div>
-    <br><br><br><br>
 {% endblock %}
 {% block scripts %}
     <script type="text/javascript" src="{{ squareup.js }}"></script>
