@@ -5,45 +5,42 @@
             <div class="col-lg-5">
                 <div class="position-sticky" style="top: 50px">
                     <h1 class="page-header mb-3 fw-semibold">PixSpeed API</h1>
-                    <p>The first <u>500</u> compressions each month are free.</p>
+                    <p>{{ g.i18n.api_documentation_free | safe }}</p>
                     {% if not user.is_authenticated %}
-                        <a href="{% url "signup" %}">Sign up now</a>
+                        <a href="{% url "signup" %}" class="btn btn-primary rounded-pill">{{ g.i18n.api_documentation_signup }}</a>
                     {% endif %}
                 </div>
             </div>
             <div class="col-lg-7">
-                <p>The PixSpeed API allows you to compress and optimize images in formats such as WebP, JPEG, PNG, and AVIF. Designed as a RESTful service, PixSpeed's API enables seamless integration for image optimization across web applications. This page provides details on the core HTTP API. Additionally, we are developing client libraries in various languages to simplify interactions with the PixSpeed API.</p>
-                <p>The API is hosted at <code>api.pixspeed.com</code>.</p>
+                <p>{{ g.i18n.api_documentation_intro }}</p>
+                <p>{{ g.i18n.api_documentation_url | safe }}</p>
                 <br>
-                <h3>Authentication</h3>
-                <p>To access the PixSpeed API, you must include your unique API key. You can obtain an API key by signing up with your name and email address. Please remember to keep your API key confidential.</p>
-                <p>Authentication with the API is handled through HTTP headers. All requests require an Authorization header containing your API key in the format key: <code>YOUR_API_KEY</code>, where <code>YOUR_API_KEY</code> is the key available on your account page.</p>
-                <p>For security, all requests must be sent over an encrypted HTTPS connection to protect your data during transmission.</p>
+                <h3>{{ g.i18n.api_documentation_authentication }}</h3>
+                <p>{{ g.i18n.api_documentation_authentication_1 }}</p>
+                <p>{{ g.i18n.api_documentation_authentication_2 | safe }}</p>
+                <p>{{ g.i18n.api_documentation_authentication_3 }}</p>
                 <br>
-                <h3>Compressing Images</h3>
-                <p>You can provide any WebP, JPEG, or PNG image URL to the PixSpeed API for compression. PixSpeed will automatically detect the image type and apply optimal compression. Compression begins as soon as you provide the URL.</p>
-                <p><b>Example Using URL for Compression</b></p>
-                <p>To use PixSpeed with an image URL, replace <code>YOUR_API_KEY</code> with your unique API key (found on your PixSpeed account page) and specify the image URL in JSON format as shown below:</p>
+                <h3>{{ g.i18n.api_documentation_compress }}</h3>
+                <p>{{ g.i18n.api_documentation_compress_1 }}</p>
+                <p><b>{{ g.i18n.api_documentation_compress_example }}</b></p>
+                <p>{{ g.i18n.api_documentation_compress_example_intro | safe }}</p>
                 <pre><code class="lang-http">curl -X POST https://api.pixspeed.com/v1/url \
      -H "Content-Type: application/json" \
      -H "key: YOUR_API_KEY" \
      -d '{"url": "https://example.com/path/to/your-image.jpg"}'
 </code></pre>
-                <p>PixSpeed will retrieve the image from the provided URL, compress it, and return the optimized version URL in the response.</p>
+                <p>{{ g.i18n.api_documentation_compress_example_intro_1 }}</p>
                 <br>
-                <h3>Optimizing and Converting Images</h3>
-                <p>With the PixSpeed API, you can not only compress images but also convert them to different formats. PixSpeed will automatically optimize the image and, if a format is specified, convert it to the desired type. Supported formats include <code>jpg</code>,
-                    <code>jpeg</code>, <code>png</code>, <code>webp</code>, and <code>avif</code>. If no format is specified, PixSpeed will retain the original format of the image.</p>
-                <p><b>Example Using cURL with an Image URL and Format</b></p>
-                <p>To use PixSpeed to optimize and convert an image, replace <code>YOUR_API_KEY</code> with your unique API key and specify the image URL and desired format in JSON format as shown below. The format can be any of the supported formats (<code>jpg</code>,
-                    <code>jpeg</code>,
-                    <code>png</code>, <code>webp</code>, or <code>avif</code>), and PixSpeed will convert the image accordingly.</p>
+                <h3>{{ g.i18n.api_documentation_optimize }}</h3>
+                <p>{{ g.i18n.api_documentation_optimize_1 }}</p>
+                <p><b>{{ g.i18n.api_documentation_optimize_example }}</b></p>
+                <p>{{ g.i18n.api_documentation_optimize_example_1 | safe }}</p>
                 <pre><code class="lang-http">curl -X POST https://api.pixspeed.com/v1/url \
      -H "Content-Type: application/json" \
      -H "key: YOUR_API_KEY" \
      -d '{"url": "https://example.com/path/to/your-image.jpg", "format": "webp"}'
 </code></pre>
-                <p>PixSpeed will optimize the image from the provided URL, convert it to <code>webp</code>, and return the optimized version’s URL in the response.</p>
+                <p>{{ g.i18n.api_documentation_optimize_example_2 | safe }}</p>
             </div>
         </div>
     </div>
