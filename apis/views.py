@@ -53,11 +53,9 @@ class WebExtractorAPI(View):
         web_scrape = WebsiteScrape.objects.create(url=website_url)
 
         # Validar la URL
-        validator = URLValidator()
-        try:
-            validator(website_url)
-        except Exception as e:
-            bugsnag.notify(Exception(f'WebExtractorAPIPage [invalid_url]: {str(e)}'))
+        website_url = Utils.validate_and_format_url(website_url)
+        if not website_url:
+            bugsnag.notify(Exception(f'WebExtractorAPIPage [invalid_url]: {website_url}'))
             web_scrape.status = WebsiteScrape.FAILED
             web_scrape.save()
             return JsonResponse({

@@ -3,6 +3,7 @@ from random import randint
 
 import requests
 from django.core.cache import cache
+from django.core.validators import URLValidator
 from django.db import connection
 from django.template.loader import get_template
 
@@ -10,6 +11,21 @@ from config import MAILGUN_KEYS
 
 
 class Utils:
+    @staticmethod
+    def validate_and_format_url(url):
+        url = url.replace("http://", "https://")
+        if not url.startswith("https://"):
+            url = "https://" + url
+
+        validator = URLValidator()
+        try:
+            validator(url)
+        except Exception as e:
+            print(str(e))
+            return
+
+        return url
+
     @staticmethod
     def get_ip(request):
         x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
