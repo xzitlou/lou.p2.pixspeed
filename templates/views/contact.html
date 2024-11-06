@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container py-5">
-        <div class="row justify-content-md-center">
-            <div class="col-sm-6">
-                <div>
-                    <a href="{% url "index" %}?lang={{ g.lang.iso }}" class="btn btn-light">← PixSpeed.com</a>
-                </div>
-                <br>
-                <h1 class="main-title">{{ g.i18n.contact_us }}</h1>
-                <br>
+        <div class="pixspeed-col mx-auto">
+            <div>
+                <a href="{% url "index" %}?lang={{ g.lang.iso }}" class="btn btn-success">← PixSpeed.com</a>
+            </div>
+            <br>
+            <div class="highlight p-4 rounded-3">
+                <h1 class="page-header fw-bold">{{ g.i18n.contact }}</h1>
                 {% if data.status %}
                     <div class="alert alert-success">{{ g.i18n.message_sent }}</div>
                 {% endif %}
@@ -32,7 +31,7 @@
                     <div class="form-group captcha-formgroup mb-2">
                         {{ form }}
                     </div>
-                    <button class="btn btn-primary btn-block w-100" tabindex="3">{{ g.i18n.send }}</button>
+                    <button class="btn btn-primary btn-block w-100 btn-lg mt-4" tabindex="3">{{ g.i18n.send }}</button>
                 </form>
             </div>
         </div>
