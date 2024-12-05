@@ -48,7 +48,7 @@
             }
         }
     </script>
-    <link href="{{ request.path }}" hreflang="x-default" rel="alternate"/>
+    <link href="https://pixspeed.com{{ request.path }}" hreflang="x-default" rel="alternate"/>
     {% for lang in g.languages %}
         <link rel="alternate" hreflang="{{ lang.iso }}" href="https://pixspeed.com{{ request.path }}?lang={{ lang.iso }}"/>
     {% endfor %}
