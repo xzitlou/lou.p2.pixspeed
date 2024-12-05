@@ -16,7 +16,7 @@
   },
   {
     "iso": "de",
-    "text": "Deutsche",
+    "text": "Deutsch",
     "en_label": "German"
   },
   {
@@ -33,5 +33,10 @@
     "iso": "hi",
     "text": "हिंदी",
     "en_label": "Hindi"
+  },
+  {
+    "iso": "fr",
+    "text": "Français",
+    "en_label": "French"
   }
 ]
