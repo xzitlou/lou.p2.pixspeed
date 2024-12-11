@@ -129,10 +129,10 @@
         </ul>
         <ul class="list-unstyled d-flex flex-column flex-sm-row gap-5 mt-4 justify-content-center">
             <li class="list-inline-item">
-                <a href="https://jsontr.ee">{{ g.i18n.jsontree }}</a>
+                <a href="https://jsontr.ee?lang={{ g.lang.iso }}">{{ g.i18n.jsontree|safe }}</a>
             </li>
             <li class="list-inline-item">
-                <a href="https://isvgeditor.com">{{ g.i18n.svg_editor }}</a>
+                <a href="https://isvgeditor.com?lang={{ g.lang.iso }}">{{ g.i18n.svg_editor|safe }}</a>
             </li>
         </ul>
         <div class="border-top border-white border-2 py-3 small">Made by <a href="https://loualcala.com/?lang={{ g.lang.iso }}" target="_blank"><u>Lou Alcalá</u></a></div>
